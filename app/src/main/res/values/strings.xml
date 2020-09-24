@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">로너 슈퍼 트레이닝</string>
+
+    <string-array name="testList">
+        <item>아아아야야아아</item>
+        <item>어여어어여엉</item>
+    </string-array>
+</resources>

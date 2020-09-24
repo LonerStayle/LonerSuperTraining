@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navi"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.supertraining.view.dest.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_nextFragment"
+            app:destination="@id/nextFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_serviceTestFragment"
+            app:destination="@id/serviceTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_broadCastTestFragment"
+            app:destination="@id/broadCastTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_contentProviderTest"
+            app:destination="@id/contentProviderTest" />
+    </fragment>
+    <fragment
+        android:id="@+id/nextFragment"
+        android:name="com.example.supertraining.view.dest.NaviTestFragment"
+        android:label="NextFragment" />
+    <fragment
+        android:id="@+id/serviceTestFragment"
+        android:name="com.example.supertraining.view.dest.ServiceTestFragment"
+        android:label="ServiceTestFragment" />
+    <fragment
+        android:id="@+id/broadCastTestFragment"
+        android:name="com.example.supertraining.view.dest.BroadCastTestFragment"
+        android:label="BroadCastTestFragment" />
+    <fragment
+        android:id="@+id/contentProviderTest"
+        android:name="com.example.supertraining.view.dest.ContentProviderTestFragment"
+        android:label="ContentProviderTest" />
+</navigation>

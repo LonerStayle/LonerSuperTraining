@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_naviBackStackTestStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="네비 백스택 테스트"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_goToTheServiceTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="서비스 테스트"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    <Button
+        android:id="@+id/button_goToTheBroadCastTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="브로드 캐스트 테스트"
+        app:layout_constraintStart_toStartOf="@+id/button_goToTheServiceTest"
+        app:layout_constraintTop_toBottomOf="@+id/button_goToTheServiceTest" />
+
+    <Button
+        android:id="@+id/button_contentProvider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="컨텐츠 프로바이더 테스트"
+        app:layout_constraintStart_toStartOf="@+id/button_goToTheBroadCastTest"
+        app:layout_constraintTop_toBottomOf="@+id/button_goToTheBroadCastTest" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
