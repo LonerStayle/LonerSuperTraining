@@ -3,11 +3,9 @@ package com.example.supertraining.view.adapter
 import android.database.Cursor
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.supertraining.R
-import com.example.supertraining.contentprovider.samaple.Cheese
+import com.example.supertraining.component.providers.samaple.Cheese
 
 class CheeseAdapter : RecyclerView.Adapter<CheeseAdapter.ViewHolder?>() {
     private var cursor: Cursor? = null

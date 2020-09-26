@@ -3,21 +3,19 @@ package com.example.supertraining.view.dest
 import android.annotation.SuppressLint
 import android.content.ContentUris
 import android.content.ContentValues
-import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
-import android.view.View
 import android.widget.SimpleAdapter
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supertraining.R
-import com.example.supertraining.contentprovider.ContentProviderTest
-import com.example.supertraining.contentprovider.samaple.Cheese
+import com.example.supertraining.component.providers.ContentProviderTest
+import com.example.supertraining.component.providers.samaple.Cheese
 import com.example.supertraining.databinding.FragmentContentProviderTestBinding
 import com.example.supertraining.utill.tedPermissionCheck
 import com.example.supertraining.view.adapter.CheeseAdapter
@@ -51,6 +49,8 @@ class ContentProviderTestFragment :
         private fun setLoaderManager() {
         LoaderManager.getInstance(requireActivity())
             .initLoader(LOADER_CHEESES, null, loaderCallbacks)
+
+
     }
 
     private fun FragmentContentProviderTestBinding.setRecyclerViewAdapter() {
@@ -116,11 +116,7 @@ class ContentProviderTestFragment :
         binding.listview.adapter = adapter
 
     }
-
-
-
-     val loaderCallbacks =  object : LoaderManager.LoaderCallbacks<Cursor> {
-
+     private val loaderCallbacks =  object : LoaderManager.LoaderCallbacks<Cursor> {
 
          override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
              return CursorLoader(

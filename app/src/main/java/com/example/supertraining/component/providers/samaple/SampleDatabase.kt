@@ -1,4 +1,4 @@
-package com.example.supertraining.contentprovider.samaple
+package com.example.supertraining.component.providers.samaple
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

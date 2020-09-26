@@ -1,4 +1,4 @@
-package com.example.supertraining.Service
+package com.example.supertraining.component.Service
 
 import android.app.Service
 import android.content.Intent

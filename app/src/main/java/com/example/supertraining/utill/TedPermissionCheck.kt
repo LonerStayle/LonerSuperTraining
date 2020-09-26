@@ -22,10 +22,8 @@ fun tedPermissionCheck(
 
         }
     }
-    /**
-     * 테스트 시 에만 try 사용
-     */
-    try {
+
+    try{
         TedPermission.with(context)
             .setPermissionListener(permission)
             .setRationaleMessage(rationalMessage)
@@ -34,7 +32,10 @@ fun tedPermissionCheck(
                 android.Manifest.permission.READ_CONTACTS
             )
             .check()
-    } catch (e: Exception) {
-        Toast.makeText(context, "setPermissions 함수 확인 요망 ", Toast.LENGTH_SHORT).show()
+    }catch (e:Exception){
+        e.printStackTrace()
     }
+
+
+
 }

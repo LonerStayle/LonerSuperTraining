@@ -1,4 +1,4 @@
-package com.example.supertraining.contentprovider
+package com.example.supertraining.component.providers
 
 import android.content.ContentProvider
 import android.content.ContentUris
@@ -7,14 +7,14 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
-import com.example.supertraining.contentprovider.samaple.Cheese
-import com.example.supertraining.contentprovider.samaple.SampleDatabase
+import com.example.supertraining.component.providers.samaple.Cheese
+import com.example.supertraining.component.providers.samaple.SampleDatabase
 
 
 class ContentProviderTest : ContentProvider() {
 
     companion object {
-        const val AUTHORITY = "com.example.supertraining.contentprovider.provider"
+        const val AUTHORITY = "com.example.supertraining.component.provider"
         val URI_CHEESE = Uri.parse(
             "content://" + AUTHORITY + "/" + Cheese.TABLE_NAME
         )

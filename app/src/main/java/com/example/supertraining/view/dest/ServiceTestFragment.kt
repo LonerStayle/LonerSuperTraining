@@ -2,11 +2,10 @@ package com.example.supertraining.view.dest
 
 import android.content.*
 import android.os.IBinder
-import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
-import com.example.supertraining.Service.ServiceTest
+import com.example.supertraining.component.Service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
 

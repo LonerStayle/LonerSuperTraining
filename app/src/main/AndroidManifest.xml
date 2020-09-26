@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-<permission android:name="com.example.supertraining.contentprovider.provider.READ_WRITE"/>
+<permission android:name="com.example.supertraining.component.providers.provider.READ_WRITE"/>
 
     <application
         android:allowBackup="true"
@@ -23,12 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".Service.ServiceTest">
+        <service android:name="com.example.supertraining.component.Service.ServiceTest">
 
         </service>
 
         <receiver
-            android:name=".broadcast_receiver.BroadCastReceiverTest"
+            android:name="com.example.supertraining.component.broadcast_receiver.BroadCastReceiverTest"
             android:enabled="true"
             android:exported="true"
             tools:ignore="ExportedReceiver">
@@ -38,10 +38,10 @@
         </receiver>
 
         <provider
-            android:authorities="com.example.supertraining.contentprovider.provider"
-            android:name=".contentprovider.ContentProviderTest"
+            android:authorities="com.example.supertraining.component.providers.provider"
+            android:name="com.example.supertraining.component.providers.ContentProviderTest"
             android:exported="true"
-            android:permission="com.example.supertraining.contentprovider.provider.READ_WRITE">
+            android:permission="com.example.supertraining.componenet.provider.READ_WRITE">
         </provider>
 
     </application>

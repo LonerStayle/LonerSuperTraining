@@ -1,13 +1,8 @@
 package com.example.supertraining.view.dest
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.util.Log
 import com.example.supertraining.R
-import com.example.supertraining.broadcast_receiver.BroadCastReceiverTest
-import com.example.supertraining.databinding.ActivityMainBinding
 import com.example.supertraining.databinding.FragmentBroadCastTestBinding
 
 import com.example.supertraining.view.base.BaseFragment
