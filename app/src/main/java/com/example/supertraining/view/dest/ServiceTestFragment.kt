@@ -2,6 +2,7 @@ package com.example.supertraining.view.dest
 
 import android.content.*
 import android.os.IBinder
+import android.view.View
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
@@ -14,24 +15,19 @@ class ServiceTestFragment() :
 
 
     override fun FragmentServiceTestBinding.setDataBind() {
+        thisFragment = this@ServiceTestFragment
         setBroadCastReceiver()
 
     }
 
-    override fun FragmentServiceTestBinding.setClickListener() {
-        setButtonServiceStartClickListener()
-        setButtonServiceBindStart()
-    }
+    override fun FragmentServiceTestBinding.setClickListener() {}
 
 
 
-    private fun FragmentServiceTestBinding.setButtonServiceStartClickListener() {
-        buttonServiceStart.setOnClickListener {
+     fun setButtonServiceStartClickListener(v: View) {
             requireContext().startService(Intent(requireContext(), ServiceTest::class.java))
-        }
     }
-    private fun FragmentServiceTestBinding.setButtonServiceBindStart() {
-        buttonServiceBindStart.setOnClickListener {
+     fun setButtonServiceBindStart(v: View) {
             val bindServiceConnection = object : ServiceConnection {
                 override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
                 }
@@ -50,7 +46,6 @@ class ServiceTestFragment() :
                 bindServiceConnection,
                 Context.BIND_AUTO_CREATE
             )
-        }
     }
 
 

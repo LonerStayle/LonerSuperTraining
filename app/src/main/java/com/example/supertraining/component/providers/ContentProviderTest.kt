@@ -14,7 +14,7 @@ import com.example.supertraining.component.providers.samaple.SampleDatabase
 class ContentProviderTest : ContentProvider() {
 
     companion object {
-        const val AUTHORITY = "com.example.supertraining.component.provider"
+        const val AUTHORITY = "com.example.supertraining.component.providers.provider"
         val URI_CHEESE = Uri.parse(
             "content://" + AUTHORITY + "/" + Cheese.TABLE_NAME
         )

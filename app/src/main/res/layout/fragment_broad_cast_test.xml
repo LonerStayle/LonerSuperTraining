@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="broadCastTest"
+            type="com.example.supertraining.view.dest.BroadCastTestFragment" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,6 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="215dp"
             android:text="브로드캐스트 리시버 테스트 시작 "
+            android:onClick="@{broadCastTest::setButtonClickListener}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

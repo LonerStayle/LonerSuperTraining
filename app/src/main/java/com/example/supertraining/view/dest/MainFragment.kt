@@ -1,5 +1,6 @@
 package com.example.supertraining.view.dest
 
+import android.view.View
 import android.widget.Toast
 import com.example.supertraining.*
 import com.example.supertraining.databinding.FragmentMainBinding
@@ -12,17 +13,11 @@ import com.example.supertraining.view.adapter.Adapter
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     override fun FragmentMainBinding.setDataBind() {
+        main = this@MainFragment
         mainViewModelTest()
     }
 
-    override fun FragmentMainBinding.setClickListener() {
-        setButtonNaviBackStackTestStartClickListener()
-        setButtonGoToTheServiceTestClickListener()
-        setButtonGoToTheBroadCastTextClickListener()
-        setButtonContentProviderClickListener()
-    }
-
-
+    override fun FragmentMainBinding.setClickListener() {}
 
 
     private fun FragmentMainBinding.mainViewModelTest() {
@@ -40,27 +35,21 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         })
     }
 
-    private fun FragmentMainBinding.setButtonGoToTheBroadCastTextClickListener() {
-        buttonGoToTheBroadCastTest.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_broadCastTestFragment)
-        }
+    fun setButtonGoToTheBroadCastTextClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_broadCastTestFragment)
+
     }
 
-    private fun FragmentMainBinding.setButtonNaviBackStackTestStartClickListener() {
-        buttonNaviBackStackTestStart.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_nextFragment)
-        }
+    fun setButtonGoToTheServiceTestClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_serviceTestFragment)
+
     }
 
-    private fun FragmentMainBinding.setButtonGoToTheServiceTestClickListener() {
-        buttonGoToTheServiceTest.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_serviceTestFragment)
-        }
+    fun setButtonContentProviderClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_contentProviderTest)
     }
 
-    private fun FragmentMainBinding.setButtonContentProviderClickListener() {
-        buttonContentProvider.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_contentProviderTest)
-        }
+    fun setButtonGoToTheNaviClickListener(v: View) {
+        findNavController().navigate(R.id.action_mainFragment_to_naviTestFragment)
     }
 }

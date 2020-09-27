@@ -11,26 +11,17 @@ import com.google.android.material.snackbar.Snackbar
 class NaviTestFragment : BaseFragment<FragmentNaviTestBinding>(R.layout.fragment_navi_test) {
 
     override fun FragmentNaviTestBinding.setDataBind() {
-        setBackButtonSetting()
+        setSystemBackButtonSetting()
     }
 
 
-    override fun FragmentNaviTestBinding.setClickListener() {
-
-    }
+    override fun FragmentNaviTestBinding.setClickListener() {}
 
 
     @SuppressLint("RestrictedApi")
-    private fun FragmentNaviTestBinding.setBackButtonSetting() {
+    private fun setSystemBackButtonSetting() {
         requireActivity().onBackPressedDispatcher.addCallback {
-            if (findNavController().backStack.last == null) {
-                Snackbar.make(root, "네비 컨트롤러 ", Snackbar.LENGTH_SHORT).show()
-            } else {
-                requireActivity().onBackPressed()
-                Snackbar.make(root, "뒤로 가기", Snackbar.LENGTH_SHORT).show()
-            }
-
+            requireActivity().onBackPressed()
         }
     }
-
 }

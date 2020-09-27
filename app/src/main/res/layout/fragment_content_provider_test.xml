@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="contentProviderTest"
+            type="com.example.supertraining.view.dest.ContentProviderTestFragment" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -29,6 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="@{contentProviderTest::setButtonAddItem}"
                     android:text="Add"/>
 
                 <Button
@@ -36,12 +43,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="@{contentProviderTest::setButtonUpdateItem}"
                     android:text="Update"/>
 
                 <Button
                     android:id="@+id/button_remove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{contentProviderTest::setButtonRemoveItem}"
                     android:layout_weight="1"
                     android:text="Remove"/>
             </LinearLayout>
@@ -60,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
             android:text="컨텐츠 리졸버 테스트 시작"
+            android:onClick="@{contentProviderTest::setButtonContentResolverStartClickListener}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

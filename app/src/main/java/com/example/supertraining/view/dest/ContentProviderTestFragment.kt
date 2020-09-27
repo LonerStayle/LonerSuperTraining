@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.view.View
 import android.widget.SimpleAdapter
 import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
@@ -34,6 +35,7 @@ class ContentProviderTestFragment :
     private var cheeseAdapter = CheeseAdapter()
 
     override fun FragmentContentProviderTestBinding.setDataBind() {
+        contentProviderTest = this@ContentProviderTestFragment
 
         populateInitialDataIfNeeded()
         setLoaderManager()
@@ -41,12 +43,7 @@ class ContentProviderTestFragment :
 
     }
 
-    override fun FragmentContentProviderTestBinding.setClickListener() {
-        setButtonAddItem()
-        setButtonUpdateItem()
-        setButtonRemoveItem()
-        setButtonContentResolverStartClickListener()
-    }
+    override fun FragmentContentProviderTestBinding.setClickListener() {}
 
         private fun setLoaderManager() {
         LoaderManager.getInstance(requireActivity())
@@ -61,12 +58,11 @@ class ContentProviderTestFragment :
     }
 
 
-    private fun FragmentContentProviderTestBinding.setButtonContentResolverStartClickListener() {
-        buttonContentResolverStart.setOnClickListener {
+     fun setButtonContentResolverStartClickListener(v:View) {
             tedPermissionCheck(requireContext(), "연락처 접근 권한을 허용해주세요") {
                 contentResolverUse()
             }
-        }
+
     }
 
     //컨텐츠 리졸버
@@ -157,37 +153,36 @@ class ContentProviderTestFragment :
         }
     }
 
-    private fun setButtonAddItem() {
-        binding.buttonAdd.setOnClickListener {
+     fun setButtonAddItem(v:View) {
+
             val values = ContentValues()
             values.put(Cheese.COLUMN_NAME, "New Item")
             val uri =
                 requireActivity().contentResolver.insert(ContentProviderTest.URI_CHEESE, values)
             Log.d(TAG, "Added item:$uri")
-        }
+
     }
 
-    private fun setButtonUpdateItem() {
-        binding.buttonUpdate.setOnClickListener {
+     fun setButtonUpdateItem(v:View) {
+
             val uri = queryAndGetOne()
             if (uri != null) {
                 val values = ContentValues()
                 values.put(Cheese.COLUMN_NAME, "Updated Item")
                 requireActivity().contentResolver.update(uri, values, null, null)
             }
-        }
+
     }
 
 
-    private fun setButtonRemoveItem() {
-        binding.buttonRemove.setOnClickListener {
+     fun setButtonRemoveItem(v:View) {
             val uri = queryAndGetOne()
             if (uri != null) {
                 requireActivity().contentResolver.delete(
                     uri, null, null
                 )
             }
-        }
+
     }
 
 

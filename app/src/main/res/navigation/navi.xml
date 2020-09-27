@@ -8,8 +8,8 @@
         android:name="com.example.supertraining.view.dest.MainFragment"
         android:label="MainFragment" >
         <action
-            android:id="@+id/action_mainFragment_to_nextFragment"
-            app:destination="@id/nextFragment" />
+            android:id="@+id/action_mainFragment_to_naviTestFragment"
+            app:destination="@id/naviTestFragment" />
         <action
             android:id="@+id/action_mainFragment_to_serviceTestFragment"
             app:destination="@id/serviceTestFragment" />
@@ -21,9 +21,9 @@
             app:destination="@id/contentProviderTest" />
     </fragment>
     <fragment
-        android:id="@+id/nextFragment"
+        android:id="@+id/naviTestFragment"
         android:name="com.example.supertraining.view.dest.NaviTestFragment"
-        android:label="NextFragment" />
+        android:label="NaviTestFragment" />
     <fragment
         android:id="@+id/serviceTestFragment"
         android:name="com.example.supertraining.view.dest.ServiceTestFragment"
