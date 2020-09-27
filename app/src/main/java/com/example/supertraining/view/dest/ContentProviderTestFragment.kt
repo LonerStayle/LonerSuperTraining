@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
 import android.widget.SimpleAdapter
+import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -33,6 +34,7 @@ class ContentProviderTestFragment :
     private var cheeseAdapter = CheeseAdapter()
 
     override fun FragmentContentProviderTestBinding.setDataBind() {
+
         populateInitialDataIfNeeded()
         setLoaderManager()
         setRecyclerViewAdapter()

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.supertraining.R
 import com.example.supertraining.databinding.ActivityMainBinding
 
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
