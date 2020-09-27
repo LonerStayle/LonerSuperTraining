@@ -10,18 +10,10 @@ import com.google.android.material.snackbar.Snackbar
 
 class NaviTestFragment : BaseFragment<FragmentNaviTestBinding>(R.layout.fragment_navi_test) {
 
-    override fun FragmentNaviTestBinding.setDataBind() {
-        setSystemBackButtonSetting()
-    }
+    override fun FragmentNaviTestBinding.setDataBind() {}
 
 
     override fun FragmentNaviTestBinding.setClickListener() {}
 
 
-    @SuppressLint("RestrictedApi")
-    private fun setSystemBackButtonSetting() {
-        requireActivity().onBackPressedDispatcher.addCallback {
-            requireActivity().onBackPressed()
-        }
-    }
 }
