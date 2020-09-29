@@ -1,4 +1,4 @@
-package com.example.supertraining.view.dest
+package com.example.supertraining.view.dest.componenttest
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
@@ -10,7 +10,6 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
 import android.widget.SimpleAdapter
-import androidx.fragment.app.Fragment
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
@@ -20,7 +19,7 @@ import com.example.supertraining.component.providers.ContentProviderTest
 import com.example.supertraining.component.providers.samaple.Cheese
 import com.example.supertraining.databinding.FragmentContentProviderTestBinding
 import com.example.supertraining.utill.tedPermissionCheck
-import com.example.supertraining.view.adapter.CheeseAdapter
+import com.example.supertraining.view.adapter.RecyclerViewCheeseAdapter
 import com.example.supertraining.view.base.BaseFragment
 
 
@@ -32,7 +31,7 @@ class ContentProviderTestFragment :
         const val LOADER_CHEESES = 1
     }
 
-    private var cheeseAdapter = CheeseAdapter()
+    private var cheeseAdapter = RecyclerViewCheeseAdapter()
 
     override fun FragmentContentProviderTestBinding.setDataBind() {
         contentProviderTest = this@ContentProviderTestFragment

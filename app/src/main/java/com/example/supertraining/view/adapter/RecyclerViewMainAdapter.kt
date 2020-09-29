@@ -9,8 +9,8 @@ import com.example.supertraining.R
 import com.example.supertraining.databinding.RecyclerviewBinding
 import com.example.supertraining.db.entity.RoomEntityTest
 
-class Adapter(val list: List<RoomEntityTest> = listOf(), val clickEvent: (String) -> Unit) :
-    RecyclerView.Adapter<Adapter.ViewHolder>() {
+class RecyclerViewMainAdapter(val list: List<RoomEntityTest> = listOf()) :
+    RecyclerView.Adapter<RecyclerViewMainAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = DataBindingUtil.bind<RecyclerviewBinding>(view)
 
@@ -22,19 +22,17 @@ class Adapter(val list: List<RoomEntityTest> = listOf(), val clickEvent: (String
             LayoutInflater.from(parent.context).inflate(R.layout.recyclerview, parent, false)
         )
 
-    override fun getItemCount() = list.size
+    override fun getItemCount():Int{
+        return list[0].text.size
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding?.apply {
-            text = list[0].text[0]
-            adapter = this@Adapter
+            text = list[0].text[position]
         }
     }
 
-    //성공한 방법
-    fun clickEvent() {
-        clickEvent(list[0].text[0])
-    }
+
 
 }

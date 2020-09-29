@@ -1,4 +1,4 @@
-package com.example.supertraining.view.dest
+package com.example.supertraining.view.dest.componenttest
 
 import android.content.*
 import android.os.IBinder
@@ -15,7 +15,7 @@ class ServiceTestFragment() :
 
 
     override fun FragmentServiceTestBinding.setDataBind() {
-        thisFragment = this@ServiceTestFragment
+        this.thisFragment = this@ServiceTestFragment
         setBroadCastReceiver()
 
     }

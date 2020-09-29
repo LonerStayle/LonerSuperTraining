@@ -9,7 +9,7 @@ data class RoomEntityTest (
     @PrimaryKey(autoGenerate = true)
     val id:Long = 0L,
     @TypeConverters(ConverterTest::class)
-  val text:List<String>
+    var text:List<String>
 
 )
 

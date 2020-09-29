@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_mainFragment_to_contentProviderTest"
             app:destination="@id/contentProviderTest" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchViewTestFragment"
+            app:destination="@id/searchViewTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/naviTestFragment"
@@ -26,14 +29,18 @@
         android:label="NaviTestFragment" />
     <fragment
         android:id="@+id/serviceTestFragment"
-        android:name="com.example.supertraining.view.dest.ServiceTestFragment"
+        android:name="com.example.supertraining.view.dest.componenttest.ServiceTestFragment"
         android:label="ServiceTestFragment" />
     <fragment
         android:id="@+id/broadCastTestFragment"
-        android:name="com.example.supertraining.view.dest.BroadCastTestFragment"
+        android:name="com.example.supertraining.view.dest.componenttest.BroadCastTestFragment"
         android:label="BroadCastTestFragment" />
     <fragment
         android:id="@+id/contentProviderTest"
-        android:name="com.example.supertraining.view.dest.ContentProviderTestFragment"
+        android:name="com.example.supertraining.view.dest.componenttest.ContentProviderTestFragment"
         android:label="ContentProviderTest" />
+    <fragment
+        android:id="@+id/searchViewTestFragment"
+        android:name="com.example.supertraining.view.dest.SearchViewTestFragment"
+        android:label="SearchViewTestFragment" />
 </navigation>

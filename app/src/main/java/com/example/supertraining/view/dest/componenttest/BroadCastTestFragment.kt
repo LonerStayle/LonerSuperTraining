@@ -1,4 +1,4 @@
-package com.example.supertraining.view.dest
+package com.example.supertraining.view.dest.componenttest
 
 import android.content.Intent
 import android.util.Log

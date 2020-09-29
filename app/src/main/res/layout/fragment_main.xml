@@ -17,51 +17,73 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_goToTheServiceTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="서비스 테스트"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="@{(v) -> main.setButtonGoToTheServiceTestClickListener(v)}"
+        android:text="서비스 테스트"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_goToTheBroadCastTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="브로드 캐스트 테스트"
+        android:layout_marginStart="8dp"
         android:onClick="@{(v) -> main.setButtonGoToTheBroadCastTextClickListener(v)}"
-        app:layout_constraintStart_toStartOf="@+id/button_goToTheServiceTest"
-        app:layout_constraintTop_toBottomOf="@+id/button_goToTheServiceTest" />
+        android:text="브로드 캐스트 테스트"
+        app:layout_constraintStart_toEndOf="@+id/button_goToTheServiceTest"
+        app:layout_constraintTop_toTopOf="@+id/button_goToTheServiceTest" />
 
     <Button
         android:id="@+id/button_contentProvider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="컨텐츠 프로바이더 테스트"
+        android:layout_marginStart="8dp"
         android:onClick="@{(v) -> main.setButtonContentProviderClickListener(v)}"
-        app:layout_constraintStart_toStartOf="@+id/button_goToTheBroadCastTest"
-        app:layout_constraintTop_toBottomOf="@+id/button_goToTheBroadCastTest" />
+        android:text="프로바이더 테스트"
+        app:layout_constraintStart_toEndOf="@+id/button_goToTheBroadCastTest"
+        app:layout_constraintTop_toTopOf="@+id/button_goToTheBroadCastTest" />
 
     <Button
         android:id="@+id/button_goTotheNavi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
-        android:layout_marginBottom="7dp"
-        android:text="Button"
         android:onClick="@{(v) -> main.setButtonGoToTheNaviClickListener(v)}"
+        android:text="네비게이션"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button_searchViewTest" />
+
+    <Button
+        android:id="@+id/button_searchViewTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:onClick="@{(v)->main.setButtonGotoSearchViewTestClickListener(v)}"
+        android:text="서치뷰 리싸 연구"
+        app:layout_constraintStart_toEndOf="@+id/button_goTotheNavi"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="뷰 관련 사항 "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

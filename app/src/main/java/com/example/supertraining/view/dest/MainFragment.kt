@@ -4,15 +4,20 @@ import android.view.View
 import android.widget.Toast
 import com.example.supertraining.*
 import com.example.supertraining.databinding.FragmentMainBinding
-import com.example.supertraining.db.entity.RoomEntityTest
 import com.example.supertraining.view.base.BaseFragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.supertraining.view.adapter.Adapter
+import com.example.supertraining.db.entity.RoomEntityTest
+import com.example.supertraining.utill.toastShortShow
+import com.example.supertraining.view.adapter.RecyclerViewMainAdapter
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     override fun FragmentMainBinding.setDataBind() {
+        mainViewModel.insert(
+            RoomEntityTest(
+                text = resources.getStringArray(R.array.testList).toList()
+            )
+        )
         main = this@MainFragment
         mainViewModelTest()
     }
@@ -22,16 +27,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     private fun FragmentMainBinding.mainViewModelTest() {
 
-        mainViewModel.insert(
-            RoomEntityTest(
-                text = resources.getStringArray(R.array.testList).toList()
-            )
-        )
-
-        mainViewModel.testList.observe(viewLifecycleOwner, Observer {
-            recyclerview.adapter = Adapter(it) {
-                Toast.makeText(requireContext(), "데바로 실행 가동완료", Toast.LENGTH_SHORT).show()
-            }
+        mainViewModel.testList.observe(viewLifecycleOwner, {
+            recyclerview.adapter = RecyclerViewMainAdapter(it)
         })
     }
 
@@ -52,4 +49,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
     fun setButtonGoToTheNaviClickListener(v: View) {
         findNavController().navigate(R.id.action_mainFragment_to_naviTestFragment)
     }
+
+    fun setButtonGotoSearchViewTestClickListener(v:View){
+        findNavController().navigate(R.id.action_mainFragment_to_searchViewTestFragment)
+    }
+
 }

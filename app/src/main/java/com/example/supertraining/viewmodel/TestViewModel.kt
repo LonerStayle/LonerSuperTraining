@@ -13,8 +13,6 @@ private val ioScope = CoroutineScope(Dispatchers.IO+ Job())
     val testList:LiveData<List<RoomEntityTest>>
     get() =  dataSource.getAllList1()
 
-val testList2:LiveData<List<RoomEntityTest>>
-    get() = dataSource.getAllList1()
 
     fun insert(roomEntityTest: RoomEntityTest){
         ioScope.launch {

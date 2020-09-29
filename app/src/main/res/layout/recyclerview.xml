@@ -5,14 +5,12 @@
             name="text"
             type="String" />
 
-        <variable
-            name="adapter"
-            type="com.example.supertraining.view.adapter.Adapter" />
+
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:onClick="@{() -> adapter.clickEvent()}"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 <!--    방법2-->
