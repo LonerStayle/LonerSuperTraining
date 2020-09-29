@@ -29,7 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:onClick="@{(v) -> main.setButtonGoToTheServiceTestClickListener(v)}"
-        android:text="서비스 테스트"
+        android:text="서비스\n테스트"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:onClick="@{(v) -> main.setButtonGoToTheBroadCastTextClickListener(v)}"
-        android:text="브로드 캐스트 테스트"
+        android:text="브로드 캐스트 \n테스트"
         app:layout_constraintStart_toEndOf="@+id/button_goToTheServiceTest"
         app:layout_constraintTop_toTopOf="@+id/button_goToTheServiceTest" />
 
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:onClick="@{(v) -> main.setButtonContentProviderClickListener(v)}"
-        android:text="프로바이더 테스트"
+        android:text="프로바이더\n 테스트"
         app:layout_constraintStart_toEndOf="@+id/button_goToTheBroadCastTest"
         app:layout_constraintTop_toTopOf="@+id/button_goToTheBroadCastTest" />
 
@@ -84,6 +84,16 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_networkTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="통신\n테스트"
+        android:onClick="@{main::setButtonNetworkTestClickListener}"
+        app:layout_constraintStart_toEndOf="@+id/button_contentProvider"
+        app:layout_constraintTop_toTopOf="@+id/button_contentProvider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

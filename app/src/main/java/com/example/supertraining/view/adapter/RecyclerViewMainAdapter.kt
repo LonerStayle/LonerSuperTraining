@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supertraining.R
 import com.example.supertraining.databinding.RecyclerviewBinding
-import com.example.supertraining.db.entity.RoomEntityTest
+import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 
 class RecyclerViewMainAdapter(val list: List<RoomEntityTest> = listOf()) :
     RecyclerView.Adapter<RecyclerViewMainAdapter.ViewHolder>() {

@@ -1,4 +1,4 @@
-package com.example.supertraining.db.converter
+package com.example.supertraining.db.locale_db.converter
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

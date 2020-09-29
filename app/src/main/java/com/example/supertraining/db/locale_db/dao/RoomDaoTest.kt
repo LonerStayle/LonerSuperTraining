@@ -1,11 +1,11 @@
-package com.example.supertraining.db.dao
+package com.example.supertraining.db.locale_db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.lifecycle.LiveData
-import com.example.supertraining.db.entity.RoomEntityTest
+import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 
 @Dao
 interface RoomDaoTest {

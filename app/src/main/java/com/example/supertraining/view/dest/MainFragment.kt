@@ -1,13 +1,11 @@
 package com.example.supertraining.view.dest
 
 import android.view.View
-import android.widget.Toast
 import com.example.supertraining.*
 import com.example.supertraining.databinding.FragmentMainBinding
 import com.example.supertraining.view.base.BaseFragment
 import androidx.navigation.fragment.findNavController
-import com.example.supertraining.db.entity.RoomEntityTest
-import com.example.supertraining.utill.toastShortShow
+import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 import com.example.supertraining.view.adapter.RecyclerViewMainAdapter
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
@@ -52,6 +50,10 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     fun setButtonGotoSearchViewTestClickListener(v:View){
         findNavController().navigate(R.id.action_mainFragment_to_searchViewTestFragment)
+    }
+
+    fun setButtonNetworkTestClickListener(v:View){
+        findNavController().navigate(R.id.action_mainFragment_to_retroFitTestFragment)
     }
 
 }

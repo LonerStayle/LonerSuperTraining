@@ -1,10 +1,10 @@
-package com.example.supertraining.db
+package com.example.supertraining.db.locale_db
 
 import android.content.Context
 import androidx.room.*
-import com.example.supertraining.db.converter.ConverterTest
-import com.example.supertraining.db.dao.RoomDaoTest
-import com.example.supertraining.db.entity.RoomEntityTest
+import com.example.supertraining.db.locale_db.converter.ConverterTest
+import com.example.supertraining.db.locale_db.dao.RoomDaoTest
+import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 
 @Database(entities = [RoomEntityTest::class],version = 1,exportSchema = false )
 @TypeConverters(ConverterTest::class)

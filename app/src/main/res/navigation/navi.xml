@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_searchViewTestFragment"
             app:destination="@id/searchViewTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_retroFitTestFragment"
+            app:destination="@id/retroFitTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/naviTestFragment"
@@ -43,4 +46,8 @@
         android:id="@+id/searchViewTestFragment"
         android:name="com.example.supertraining.view.dest.SearchViewTestFragment"
         android:label="SearchViewTestFragment" />
+    <fragment
+        android:id="@+id/retroFitTestFragment"
+        android:name="com.example.supertraining.view.dest.RetroFitTestFragment"
+        android:label="RetroFitTestFragment" />
 </navigation>

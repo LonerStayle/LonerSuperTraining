@@ -8,5 +8,5 @@
         <item>123a</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="retrofitTest_textUserData">아이디:(%s), 이메일:(%s)</string>
 </resources>

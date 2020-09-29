@@ -1,20 +1,12 @@
 package com.example.supertraining.view.dest
 
-import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.lifecycle.Observer
 import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentSearchViewTestBinding
-import com.example.supertraining.databinding.FragmentServiceTestBinding
-import com.example.supertraining.db.entity.RoomEntityTest
+import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 import com.example.supertraining.view.adapter.RecyclerViewSearchTestAdapter
 import com.example.supertraining.view.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_search_view_test.*
 
 
 class SearchViewTestFragment :

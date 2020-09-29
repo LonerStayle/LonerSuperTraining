@@ -1,7 +1,7 @@
-package com.example.supertraining.db.entity
+package com.example.supertraining.db.locale_db.entity
 
 import androidx.room.*
-import com.example.supertraining.db.converter.ConverterTest
+import com.example.supertraining.db.locale_db.converter.ConverterTest
 
 @Entity
 
