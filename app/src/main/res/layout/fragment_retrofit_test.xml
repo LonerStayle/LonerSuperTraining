@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="회원가입"
-            android:onClick="@{()->vm.userRegister(user)}"
+            android:onClick="@{()->vm.userRegister(user,thisFragment.jsonCallback)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="유저 확인"
-            android:onClick="@{()->vm.userCheck(user.userId)}"
+            android:onClick="@{()->vm.userCheck(user)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_register"
             app:layout_constraintTop_toTopOf="parent" />

@@ -89,11 +89,11 @@
         android:id="@+id/button_networkTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="통신\n테스트"
+        android:layout_marginTop="8dp"
         android:onClick="@{main::setButtonNetworkTestClickListener}"
-        app:layout_constraintStart_toEndOf="@+id/button_contentProvider"
-        app:layout_constraintTop_toTopOf="@+id/button_contentProvider" />
+        android:text="통신\n테스트"
+        app:layout_constraintStart_toStartOf="@+id/button_contentProvider"
+        app:layout_constraintTop_toBottomOf="@+id/button_contentProvider" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
