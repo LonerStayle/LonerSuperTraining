@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="vm"
             type="com.example.supertraining.viewmodel.NetworkViewModel" />
+
         <variable
             name="thisFragment"
             type="com.example.supertraining.view.dest.RetroFitTestFragment" />
-
-        <variable
-            name="user"
-            type="com.example.supertraining.db.network_db.dataholder.User" />
-
 
     </data>
 
@@ -34,23 +32,55 @@
             android:id="@+id/button_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{()->vm.userRegister(thisFragment.setUserData(),thisFragment.jsonCallback)}"
             android:text="회원가입"
-            android:onClick="@{()->vm.userRegister(user,thisFragment.jsonCallback)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <Button
             android:id="@+id/button_userCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:onClick="@{()->vm.userCheck(thisFragment.setUserData())}"
             android:text="유저 확인"
-            android:onClick="@{()->vm.userCheck(user)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_register"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/editText_IdSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="아이디 입력"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/button_register"
+            app:layout_constraintTop_toBottomOf="@+id/textView_userDataCheck" />
+
+        <EditText
+            android:id="@+id/editText_passwordSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="비밀번호 입력"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/editText_IdSignUp"
+            app:layout_constraintTop_toBottomOf="@+id/editText_IdSignUp" />
+
+        <EditText
+            android:id="@+id/editText_emailSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이메일 입력"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/editText_passwordSignUp"
+            app:layout_constraintTop_toBottomOf="@+id/editText_passwordSignUp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

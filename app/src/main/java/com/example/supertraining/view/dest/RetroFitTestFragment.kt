@@ -1,8 +1,6 @@
 package com.example.supertraining.view.dest
 
-import android.annotation.SuppressLint
 import android.util.Log
-import android.view.View
 import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentRetrofitTestBinding
 import com.example.supertraining.db.network_db.dataholder.User
@@ -14,9 +12,6 @@ import retrofit2.Response
 
 class RetroFitTestFragment :
     BaseFragment<FragmentRetrofitTestBinding>(R.layout.fragment_retrofit_test) {
-
-    private val userData = User("hihihi", "hihihi", "hihihi")
-
     override fun FragmentRetrofitTestBinding.setDataBind() {
         setData()
         setObserver()
@@ -29,7 +24,7 @@ class RetroFitTestFragment :
     private fun FragmentRetrofitTestBinding.setData() {
         thisFragment = this@RetroFitTestFragment
         vm = networkViewModel
-        user = userData
+
     }
 
 
@@ -40,14 +35,24 @@ class RetroFitTestFragment :
         })
     }
 
-  val jsonCallback = object : Callback<JsonElement> {
-            override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
-                Log.d("check", "회원 가입 성공 ")
-            }
 
-            override fun onFailure(call: Call<JsonElement>, t: Throwable) {
-                Log.d("check", "네트워크 문제로 회원 가입 실패 ")
-            }
-
+    val jsonCallback = object : Callback<JsonElement> {
+        override fun onResponse(call: Call<JsonElement>, response: Response<JsonElement>) {
+            Log.d("registerCheck", "회원 가입 성공 ")
         }
+
+        override fun onFailure(call: Call<JsonElement>, t: Throwable) {
+            Log.d("registerCheck", "네트워크 문제로 회원 가입 실패 ")
+        }
+    }
+
+     fun setUserData():User{
+        binding.apply {
+           return User(
+                editTextIdSignUp.text.toString(),
+                editTextPasswordSignUp.text.toString(),
+                editTextEmailSignUp.text.toString()
+            )
+        }
+    }
 }

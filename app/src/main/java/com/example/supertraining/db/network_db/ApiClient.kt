@@ -32,7 +32,7 @@ interface ApiService {
     suspend fun userRegister(
         @Field("user_id") userId: String,
         @Field("user_password") userPassword: String,
-        @Field("email") email: String ): Call<JsonElement>
+        @Field("email") email: String ): JsonElement
 
     @PUT("users")
     suspend fun userDataUpdate(
@@ -43,7 +43,9 @@ interface ApiService {
 
     @GET("users")
     suspend fun userDataSearch(
-        @Query("user") user: User,
+        @Query("user_id") userId: String,
+        @Query("user_password") userPassword: String,
+        @Query("email") email: String
     ): User
 
     @DELETE("users")

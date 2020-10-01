@@ -9,25 +9,35 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-interface DataSource{
+interface DataSource {
 
     suspend fun userRegister(
-         userId:String,
-         userPassword:String,
-         userEmail:String
-    ): Call<JsonElement>
+        userId: String,
+        userPassword: String,
+        userEmail: String,
+    ): JsonElement
+
     suspend fun getUserData(
-         user: User,
-    ):User
+        userId: String, userPassword: String, userEmail: String
+    ): User
 
 }
 
-class NetworkRepository:DataSource {
-    override suspend fun userRegister( userId:String, userPassword:String, userEmail:String): Call<JsonElement> {
-       return ApiClient.api.userRegister(userId,userPassword,userEmail)
+class NetworkRepository : DataSource {
+    override  suspend fun userRegister(
+        userId: String,
+        userPassword: String,
+        userEmail: String,
+    ): JsonElement {
+        return ApiClient.api.userRegister(userId, userPassword, userEmail)
     }
 
-    override suspend fun getUserData(user:User):User {
-     return ApiClient.api.userDataSearch(user)
+    override suspend fun getUserData(
+        userId: String,
+        userPassword: String,
+        userEmail: String
+    ): User {
+        return ApiClient.api.userDataSearch(userId,userPassword,userEmail)
     }
+
 }
