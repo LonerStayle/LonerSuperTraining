@@ -25,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name="com.example.supertraining.component.Service.ServiceTest">
 
         </service>
@@ -39,11 +40,18 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".component.Service.AccessibilityServiceTest"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+        </service>
+
         <provider
             android:name="com.example.supertraining.component.providers.ContentProviderTest"
             android:authorities="com.example.supertraining.component.providers.provider"
             android:exported="true"
-            android:permission="com.example.supertraining.componenet.provider.READ_WRITE"></provider>
+            android:permission="com.example.supertraining.componenet.provider.READ_WRITE" />
 
     </application>
 

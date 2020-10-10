@@ -1,14 +1,12 @@
-package com.example.supertraining.utill
+package com.example.supertraining.view.utill
 
 import android.content.Context
 import android.widget.Toast
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
-import java.security.Permission
 
 fun tedPermissionCheck(
     context: Context,
-    rationalMessage: String,
     onPermissionGrantedAfterFunction: () -> Unit
 ) {
     val permission = object : PermissionListener {
@@ -26,10 +24,11 @@ fun tedPermissionCheck(
     try{
         TedPermission.with(context)
             .setPermissionListener(permission)
-            .setRationaleMessage(rationalMessage)
+            .setRationaleMessage("권한을 허용해주세요")
             .setDeniedMessage("권한이 거부되었습니다. [앱 설정] -> [권한] 항목에서 이용해주세요")
             .setPermissions(
-                android.Manifest.permission.READ_CONTACTS
+                android.Manifest.permission.READ_CONTACTS,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             )
             .check()
     }catch (e:Exception){

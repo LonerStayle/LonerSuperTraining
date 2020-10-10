@@ -132,7 +132,8 @@ object SampleOfMediaManager {
             MediaStore.Files.FileColumns.DATA,
             MediaStore.Files.FileColumns.MIME_TYPE)
         val selection = MediaStore.Files.FileColumns.DATA + " like ?"
-        val selectionArgs = arrayOf("%$directory%") // without /storage/emulated/0/ ex) /storage/emulated/0/Pictures/MyPic/ -> Pictures/MyPic/
+        val selectionArgs = arrayOf("%$directory%")
+        // without /storage/emulated/0/ ex) /storage/emulated/0/Pictures/MyPic/ -> Pictures/MyPic/
         val result = ArrayList<Uri>()
 
         context.contentResolver.query(defaultUri, projection, selection, selectionArgs, null)?.use { cursor ->

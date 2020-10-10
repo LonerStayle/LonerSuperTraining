@@ -37,5 +37,5 @@ abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): 
         root
     }
     abstract fun VDB.setDataBind()
-    abstract fun VDB.setClickListener()
+    open fun VDB.setClickListener() = Unit
 }

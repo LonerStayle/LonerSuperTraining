@@ -20,26 +20,19 @@ class ServiceTestFragment() :
 
     }
 
-    override fun FragmentServiceTestBinding.setClickListener() {}
-
-
-
      fun setButtonServiceStartClickListener(v: View) {
             requireContext().startService(Intent(requireContext(), ServiceTest::class.java))
     }
      fun setButtonServiceBindStart(v: View) {
             val bindServiceConnection = object : ServiceConnection {
-                override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {
-                }
-
+                override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {}
                 override fun onServiceDisconnected(p0: ComponentName?) {
                     Toast.makeText(
                         requireContext(),
-                        "예기치 못한 사정으로바인드 연결이 끊겼습니다.",
+                        "예기치 못한 사정으로 바인드 연결이 끊겼습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-
             }
             requireContext().bindService(
                 Intent(requireContext(), ServiceTest::class.java),

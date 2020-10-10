@@ -22,14 +22,16 @@ buildscript {
         def retrofit_version = '2.9.0'
 
         def room_version = '2.2.5'
-        def groupie_version ='2.8.1'
+        def groupie_version = '2.8.1'
         def apache_commons_version = '3.0'
         def spin_kit = '1.4.0'
         def goolgle_gps_service = '17.0.0'
-        def ted_permission_version='2.2.3'
+        def ted_permission_version = '2.2.3'
         def nav_version = '2.3.0'
-
         def klaxon_version = '5.0.1'
+
+        def permissionDispatcherVersion = '4.8.0'
+
         libraries = [
                 //kotlin 기본 라이브러리
                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -87,21 +89,26 @@ buildscript {
                 "gun0912.ted:tedpermission:$ted_permission_version",
 
                 //String To JsonObject
-                "com.beust:klaxon:$klaxon_version"
+                "com.beust:klaxon:$klaxon_version",
 
-
-
+                "org.permissionsdispatcher:permissionsdispatcher:$permissionDispatcherVersion"
 
         ]
+
         arch_libraries = [
 
                 // Navigation
                 "androidx.navigation:navigation-fragment-ktx:$nav_version",
                 "androidx.navigation:navigation-ui-ktx:$nav_version"
         ]
+
         librariesKapt = [
-                "androidx.room:room-compiler:$room_version"
+                //룸
+                "androidx.room:room-compiler:$room_version",
+                //프리미션 디스패쳐
+                "org.permissionsdispatcher:permissionsdispatcher-processor:$permissionDispatcherVersion"
         ]
+
         testLibraries = [
                 "junit:junit:$junit_version",
                 // Espresso
@@ -117,7 +124,7 @@ buildscript {
     }
     dependencies {
         def nav_version = '2.3.0'
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         // NOTE: Do not place your application dependencies here; they belong
@@ -130,6 +137,8 @@ allprojects {
         google()
         jcenter()
 
+// 디스패쳐
+        maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
         //카카오톡
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }

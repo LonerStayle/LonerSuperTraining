@@ -6,6 +6,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.ContactsContract
 import android.util.Log
 import android.view.View
@@ -18,9 +19,16 @@ import com.example.supertraining.R
 import com.example.supertraining.component.providers.ContentProviderTest
 import com.example.supertraining.component.providers.samaple.Cheese
 import com.example.supertraining.databinding.FragmentContentProviderTestBinding
-import com.example.supertraining.utill.tedPermissionCheck
 import com.example.supertraining.view.adapter.RecyclerViewCheeseAdapter
 import com.example.supertraining.view.base.BaseFragment
+import com.example.supertraining.view.utill.tedPermissionCheck
+import com.example.supertraining.view.utill.toastShortShow
+import java.io.BufferedWriter
+import java.io.FileWriter
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class ContentProviderTestFragment :
@@ -35,7 +43,6 @@ class ContentProviderTestFragment :
 
     override fun FragmentContentProviderTestBinding.setDataBind() {
         contentProviderTest = this@ContentProviderTestFragment
-
         populateInitialDataIfNeeded()
         setLoaderManager()
         setRecyclerViewAdapter()
@@ -44,7 +51,7 @@ class ContentProviderTestFragment :
 
     override fun FragmentContentProviderTestBinding.setClickListener() {}
 
-        private fun setLoaderManager() {
+    private fun setLoaderManager() {
         LoaderManager.getInstance(requireActivity())
             .initLoader(LOADER_CHEESES, null, loaderCallbacks)
 
@@ -57,10 +64,40 @@ class ContentProviderTestFragment :
     }
 
 
-     fun setButtonContentResolverStartClickListener(v:View) {
-            tedPermissionCheck(requireContext(), "연락처 접근 권한을 허용해주세요") {
-                contentResolverUse()
-            }
+
+
+    fun setButtonTextFileCreateTestClickLister(v: View) {
+
+        tedPermissionCheck(requireContext()){
+            val absolutePath = "/storage/emulated/0/"
+//       Original filePath
+            Environment.getExternalStorageDirectory().absolutePath
+
+            //        /storage/emulated/0/Android/data/com.example.cameraappexample/files/pictures/
+            val testPath = Environment.DIRECTORY_PICTURES
+
+            //        /storage/emulated/0/Android/data/com.example.cameraappexample/files/pictures
+            val testPath2 = requireContext().getExternalFilesDir(null)?.absolutePath + "/pictures/"
+
+
+            val testpath3 = requireContext().getExternalFilesDir("/pictures/")
+
+            val timeStamp = SimpleDateFormat("yyyyMMdd_hhmmss").format(Date())
+            val fileName = "Gmail.txt"
+            val out = absolutePath + fileName
+            val bufferedWriter = BufferedWriter(FileWriter(out))
+            bufferedWriter.write("test")
+            bufferedWriter.close()
+            requireContext().toastShortShow("Gmail.text 파일이 생성되었는지 확인해보세요")
+        }
+    }
+
+
+
+    fun setButtonContentResolverStartClickListener(v: View) {
+        tedPermissionCheck(requireContext()) {
+            contentResolverUse()
+        }
 
     }
 
@@ -113,28 +150,29 @@ class ContentProviderTestFragment :
         binding.listview.adapter = adapter
 
     }
-     private val loaderCallbacks =  object : LoaderManager.LoaderCallbacks<Cursor> {
 
-         override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
-             return CursorLoader(
-                 requireContext(),
-                 ContentProviderTest.URI_CHEESE,
-                 arrayOf(Cheese.COLUMN_NAME),
-                 null,
-                 null,
-                 Cheese.COLUMN_NAME
-             )
-         }
+    private val loaderCallbacks = object : LoaderManager.LoaderCallbacks<Cursor> {
 
-         override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
-             cheeseAdapter.setCheeses(data)
-         }
+        override fun onCreateLoader(id: Int, args: Bundle?): Loader<Cursor> {
+            return CursorLoader(
+                requireContext(),
+                ContentProviderTest.URI_CHEESE,
+                arrayOf(Cheese.COLUMN_NAME),
+                null,
+                null,
+                Cheese.COLUMN_NAME
+            )
+        }
 
-         override fun onLoaderReset(loader: Loader<Cursor>) {
-             cheeseAdapter.setCheeses(null)
-         }
+        override fun onLoadFinished(loader: Loader<Cursor>, data: Cursor?) {
+            cheeseAdapter.setCheeses(data)
+        }
 
-     }
+        override fun onLoaderReset(loader: Loader<Cursor>) {
+            cheeseAdapter.setCheeses(null)
+        }
+
+    }
 
     @SuppressLint("Recycle")
     private fun populateInitialDataIfNeeded() {
@@ -152,35 +190,35 @@ class ContentProviderTestFragment :
         }
     }
 
-     fun setButtonAddItem(v:View) {
+    fun setButtonAddItem(v: View) {
 
+        val values = ContentValues()
+        values.put(Cheese.COLUMN_NAME, "New Item")
+        val uri =
+            requireActivity().contentResolver.insert(ContentProviderTest.URI_CHEESE, values)
+        Log.d(TAG, "Added item:$uri")
+
+    }
+
+    fun setButtonUpdateItem(v: View) {
+
+        val uri = queryAndGetOne()
+        if (uri != null) {
             val values = ContentValues()
-            values.put(Cheese.COLUMN_NAME, "New Item")
-            val uri =
-                requireActivity().contentResolver.insert(ContentProviderTest.URI_CHEESE, values)
-            Log.d(TAG, "Added item:$uri")
-
-    }
-
-     fun setButtonUpdateItem(v:View) {
-
-            val uri = queryAndGetOne()
-            if (uri != null) {
-                val values = ContentValues()
-                values.put(Cheese.COLUMN_NAME, "Updated Item")
-                requireActivity().contentResolver.update(uri, values, null, null)
-            }
+            values.put(Cheese.COLUMN_NAME, "Updated Item")
+            requireActivity().contentResolver.update(uri, values, null, null)
+        }
 
     }
 
 
-     fun setButtonRemoveItem(v:View) {
-            val uri = queryAndGetOne()
-            if (uri != null) {
-                requireActivity().contentResolver.delete(
-                    uri, null, null
-                )
-            }
+    fun setButtonRemoveItem(v: View) {
+        val uri = queryAndGetOne()
+        if (uri != null) {
+            requireActivity().contentResolver.delete(
+                uri, null, null
+            )
+        }
 
     }
 
@@ -200,4 +238,12 @@ class ContentProviderTestFragment :
 
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 }

@@ -95,5 +95,16 @@
         app:layout_constraintStart_toStartOf="@+id/button_contentProvider"
         app:layout_constraintTop_toBottomOf="@+id/button_contentProvider" />
 
+    <Button
+        android:id="@+id/button_accessibilitySettingTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="접근성\n테스트"
+        android:onClick="@{main::setButtonAccessibilitySettingTestClickListener}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_goToTheServiceTest" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
