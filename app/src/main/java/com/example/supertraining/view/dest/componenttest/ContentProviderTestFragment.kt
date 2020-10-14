@@ -83,12 +83,12 @@ class ContentProviderTestFragment :
             val testpath3 = requireContext().getExternalFilesDir("/pictures/")
 
             val timeStamp = SimpleDateFormat("yyyyMMdd_hhmmss").format(Date())
-            val fileName = "Gmail.txt"
+            val fileName = "email.txt"
             val out = absolutePath + fileName
             val bufferedWriter = BufferedWriter(FileWriter(out))
-            bufferedWriter.write("test")
+            bufferedWriter.write("32johnblaster@gmail.com")
             bufferedWriter.close()
-            requireContext().toastShortShow("Gmail.text 파일이 생성되었는지 확인해보세요")
+            requireContext().toastShortShow("email.text 파일이 생성되었는지 확인해보세요")
         }
     }
 

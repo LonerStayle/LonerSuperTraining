@@ -24,5 +24,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ToggleButton
+            android:id="@+id/toggleButton_alramTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="alramTest"
+            app:layout_constraintBottom_toTopOf="@+id/button_broadCastTestStart"
+            app:layout_constraintEnd_toEndOf="@+id/button_broadCastTestStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton_preiodAlram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="preiodTest"
+            app:layout_constraintBottom_toTopOf="@+id/button_broadCastTestStart"
+            app:layout_constraintStart_toStartOf="@+id/button_broadCastTestStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="반복 알람"
+
+            app:layout_constraintBottom_toTopOf="@+id/toggleButton_preiodAlram"
+            app:layout_constraintStart_toStartOf="@+id/toggleButton_preiodAlram" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="정확한 한번 알람"
+            app:layout_constraintBottom_toTopOf="@+id/toggleButton_alramTest"
+            app:layout_constraintStart_toStartOf="@+id/toggleButton_alramTest" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

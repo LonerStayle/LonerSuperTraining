@@ -40,6 +40,13 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".component.broadcast_receiver.AlarmReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.supertraining" />
+            </intent-filter>
+        </receiver>
+
         <service android:name=".component.Service.AccessibilityServiceTest"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
