@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+
     <permission android:name="com.example.supertraining.component.providers.provider.READ_WRITE" />
 
     <application
@@ -18,7 +19,8 @@
         android:roundIcon="@drawable/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.activity.MainActivity">
+        <activity android:name=".view.activity.MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
