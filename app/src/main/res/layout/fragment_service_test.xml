@@ -34,6 +34,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_serviceStart" />
 
+        <Button
+            android:id="@+id/button_mediaPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="미디어플레이어 백그라운드 실행 테스트"
+            android:onClick="@{thisFragment::setButtonMediaPlayerClickListener}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_serviceBindStart" />
+
+        <Button
+            android:id="@+id/button_narrationStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="나레이션 백그라운드 실행 테스트"
+            android:onClick="@{thisFragment::setButtonNarrationStartClickListener}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_mediaPlayer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -28,9 +28,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.example.supertraining.component.Service.ServiceTest">
-
-        </service>
 
         <receiver
             android:name="com.example.supertraining.component.broadcast_receiver.BroadCastReceiverTest"
@@ -49,19 +46,21 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".component.Service.AccessibilityServiceTest"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-        </service>
-
         <provider
             android:name="com.example.supertraining.component.providers.ContentProviderTest"
             android:authorities="com.example.supertraining.component.providers.provider"
             android:exported="true"
             android:permission="com.example.supertraining.componenet.provider.READ_WRITE" />
 
+        <service android:name=".component.Service.AccessibilityServiceTest"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+        </service>
+        <service android:name=".component.Service.ServiceTest"/>
+        <service android:name=".component.Service.BackgroundSoundService"/>
+        <service android:name=".component.Service.BackgroundNarrationService"/>
     </application>
 
 </manifest>

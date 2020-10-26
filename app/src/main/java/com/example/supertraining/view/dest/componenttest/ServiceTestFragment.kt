@@ -6,9 +6,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
+import com.example.supertraining.component.Service.BackgroundNarrationService
+import com.example.supertraining.component.Service.BackgroundSoundService
 import com.example.supertraining.component.Service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
+
 
 class ServiceTestFragment() :
     BaseFragment<FragmentServiceTestBinding>(R.layout.fragment_service_test) {
@@ -17,30 +20,7 @@ class ServiceTestFragment() :
     override fun FragmentServiceTestBinding.setDataBind() {
         this.thisFragment = this@ServiceTestFragment
         setBroadCastReceiver()
-
     }
-
-     fun setButtonServiceStartClickListener(v: View) {
-            requireContext().startService(Intent(requireContext(), ServiceTest::class.java))
-    }
-     fun setButtonServiceBindStart(v: View) {
-            val bindServiceConnection = object : ServiceConnection {
-                override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {}
-                override fun onServiceDisconnected(p0: ComponentName?) {
-                    Toast.makeText(
-                        requireContext(),
-                        "예기치 못한 사정으로 바인드 연결이 끊겼습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            requireContext().bindService(
-                Intent(requireContext(), ServiceTest::class.java),
-                bindServiceConnection,
-                Context.BIND_AUTO_CREATE
-            )
-    }
-
 
     private fun setBroadCastReceiver() {
         // 싱글톤 단점을  억지로 막는법.. 값을 보내는 쪽에서 count를 둔다. 그럴러면 아래걸 지우고 service쪽에 둬야함
@@ -60,6 +40,37 @@ class ServiceTestFragment() :
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(messageReceiver, IntentFilter("intent_action"))
     }
+
+    fun setButtonServiceBindStart(v: View) {
+        val bindServiceConnection = object : ServiceConnection {
+            override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {}
+            override fun onServiceDisconnected(p0: ComponentName?) {
+                Toast.makeText(
+                    requireContext(),
+                    "예기치 못한 사정으로 바인드 연결이 끊겼습니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        requireContext().bindService(
+            Intent(requireContext(), ServiceTest::class.java),
+            bindServiceConnection,
+            Context.BIND_AUTO_CREATE
+        )
+    }
+
+    fun setButtonMediaPlayerClickListener(v:View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+        requireContext().startService(intent)
+    }
+
+    fun setButtonServiceStartClickListener(v: View) {
+        requireContext().startService(Intent(requireContext(), ServiceTest::class.java))
+    }
+    fun setButtonNarrationStartClickListener(v: View) {
+        requireContext().startService(Intent(requireContext(), BackgroundNarrationService::class.java))
+    }
+
 
 
 }
