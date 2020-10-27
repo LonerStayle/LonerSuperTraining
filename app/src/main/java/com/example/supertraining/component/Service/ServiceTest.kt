@@ -14,6 +14,10 @@ class ServiceTest : Service() {
     companion object {
         const val SERVICE_CHANNEL_ID = "ServiceChannelID"
         const val FORE_GROUND_SERVICE_ID = 191919
+        const val MUSIC_CONTROL_MODE_CHECK = "music_control_pause_key"
+        const val MUSIC_CONTROL_PLAY_CONTROL = 0
+        const val MUSIC_CONTROL_SEEK_TO_NEXT = 1
+        const val MUSIC_CONTROL_SEEK_TO_PREV = 2
     }
 
     override fun onCreate() {
@@ -26,7 +30,6 @@ class ServiceTest : Service() {
             .setGraph(R.navigation.navi)
             .setDestination(R.id.serviceTestFragment)
 //            .setArguments(args)
-
             .createPendingIntent()
 
         val builder = NotificationCompat.Builder(this, SERVICE_CHANNEL_ID) // channel ID
@@ -52,12 +55,14 @@ class ServiceTest : Service() {
         return START_REDELIVER_INTENT
     }
 
-    override fun onBind(p0: Intent?): IBinder? {
+    override fun onBind(intent: Intent?): IBinder? {
         Toast.makeText(
             this,
             "프레그먼트에서 왔습니다. onBind를 통해 실행됩니다.",
             Toast.LENGTH_SHORT
         ).show()
+
+
         return null
     }
 

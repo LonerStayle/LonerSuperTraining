@@ -1,9 +1,12 @@
 package com.example.supertraining.view.dest.componenttest
 
 import android.content.*
+import android.media.AudioManager
 import android.os.IBinder
 import android.view.View
+import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
 import com.example.supertraining.component.Service.BackgroundNarrationService
@@ -16,10 +19,13 @@ import com.example.supertraining.view.base.BaseFragment
 class ServiceTestFragment() :
     BaseFragment<FragmentServiceTestBinding>(R.layout.fragment_service_test) {
 
+    private lateinit var bindingService: BackgroundSoundService
 
     override fun FragmentServiceTestBinding.setDataBind() {
         this.thisFragment = this@ServiceTestFragment
         setBroadCastReceiver()
+        setVolumeControl()
+
     }
 
     private fun setBroadCastReceiver() {
@@ -59,7 +65,7 @@ class ServiceTestFragment() :
         )
     }
 
-    fun setButtonMediaPlayerClickListener(v:View) {
+    fun setButtonMediaPlayerClickListener(v: View) {
         val intent = Intent(requireContext(), BackgroundSoundService::class.java)
         requireContext().startService(intent)
     }
@@ -67,10 +73,110 @@ class ServiceTestFragment() :
     fun setButtonServiceStartClickListener(v: View) {
         requireContext().startService(Intent(requireContext(), ServiceTest::class.java))
     }
+
     fun setButtonNarrationStartClickListener(v: View) {
-        requireContext().startService(Intent(requireContext(), BackgroundNarrationService::class.java))
+        requireContext().startService(
+            Intent(
+                requireContext(),
+                BackgroundNarrationService::class.java
+            )
+        )
     }
 
 
+    fun setButtonMediaPlayerPauseClickListener(v: View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+        intent.putExtra(
+            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
+            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
+        )
+        requireContext().startService(intent)
+//        val bindServiceConnection = object : ServiceConnection {
+//            override fun onServiceConnected(componentName: ComponentName?, iBinder: IBinder?) {
+//                val binder = iBinder as BackgroundSoundService.LocalBinder
+//                bindingService = binder.getService()
+//
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    delay(200L)
+//                    bindingService.let {
+//                        if (it.mediaPlayer.isPlaying)
+//                            it.mediaPlayer.pause()
+//                        else
+//                            it.mediaPlayer.start()
+//                    }
+//                }
+//            }
+//
+//            override fun onServiceDisconnected(componentName: ComponentName?) {
+//            }
+//        }
+
+//        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+//        context?.bindService(
+//            intent,
+//            bindServiceConnection,
+//            Context.BIND_AUTO_CREATE
+//        )
+
+
+    }
+
+    fun setButtonMusicSeekToPrev(v: View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+        intent.putExtra(
+            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
+            ServiceTest.MUSIC_CONTROL_SEEK_TO_PREV
+        )
+        requireContext().startService(intent)
+    }
+
+    fun setButtonMusicSeekToNext(v: View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+        intent.putExtra(
+            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
+            ServiceTest.MUSIC_CONTROL_SEEK_TO_NEXT
+        )
+        requireContext().startService(intent)
+    }
+
+    fun setButtonVolumeControlVisibleClickListener(v:View){
+        with(binding){
+
+            seekBarVolumeControl.let{
+                when(it.visibility){
+                    View.VISIBLE -> it.visibility = View.GONE
+                    View.GONE -> it.visibility = View.VISIBLE
+                    else -> return@let
+                }
+            }
+
+        }
+    }
+
+
+    private fun FragmentServiceTestBinding.setVolumeControl() {
+        val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+        val currentVolume = audio!!.getStreamVolume(AudioManager.STREAM_MUSIC)
+        val maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+
+
+        seekBarVolumeControl.max = maxVolume
+        seekBarVolumeControl.progress = currentVolume
+        seekBarVolumeControl.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, p2: Boolean) {
+
+                audio.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
+    }
 
 }
