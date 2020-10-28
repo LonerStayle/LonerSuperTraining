@@ -14,6 +14,7 @@ import com.example.supertraining.component.Service.BackgroundSoundService
 import com.example.supertraining.component.Service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
+import com.example.supertraining.view.utill.Contents
 
 
 class ServiceTestFragment() :
@@ -121,7 +122,7 @@ class ServiceTestFragment() :
 
     }
 
-    fun setButtonMusicSeekToPrev(v: View) {
+    fun setButtonMusicSeekToPrevClickListener(v: View) {
         val intent = Intent(requireContext(), BackgroundSoundService::class.java)
         intent.putExtra(
             ServiceTest.MUSIC_CONTROL_MODE_CHECK,
@@ -130,7 +131,7 @@ class ServiceTestFragment() :
         requireContext().startService(intent)
     }
 
-    fun setButtonMusicSeekToNext(v: View) {
+    fun setButtonMusicSeekToNextClickListener(v: View) {
         val intent = Intent(requireContext(), BackgroundSoundService::class.java)
         intent.putExtra(
             ServiceTest.MUSIC_CONTROL_MODE_CHECK,
@@ -139,11 +140,59 @@ class ServiceTestFragment() :
         requireContext().startService(intent)
     }
 
-    fun setButtonVolumeControlVisibleClickListener(v:View){
-        with(binding){
+    fun setButtonNarrationChangeClickListener(v: View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
 
-            seekBarVolumeControl.let{
-                when(it.visibility){
+        intent.putExtra(
+            ServiceTest.MUSIC_SELECT_CHANGE,
+            true
+        )
+        intent.putExtra(
+            ServiceTest.MUSIC_URI_CHANGE,
+            Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                "sound_sample_narration",
+                "raw",
+                requireContext().packageName
+            ).toString()
+        )
+
+
+        intent.putExtra(
+            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
+            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
+        )
+
+        requireContext().startService(intent)
+    }
+
+    fun setButtonBackgroundMusicPlayClickListener(v: View) {
+        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
+        intent.putExtra(
+            ServiceTest.MUSIC_SELECT_CHANGE,
+            true
+        )
+        intent.putExtra(
+            ServiceTest.MUSIC_URI_CHANGE,
+            Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
+                "music_sample_background",
+                "raw",
+                requireContext().packageName
+            ).toString()
+        )
+
+        intent.putExtra(
+            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
+            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
+        )
+
+        requireContext().startService(intent)
+    }
+
+    fun setButtonVolumeControlVisibleClickListener(v: View) {
+        with(binding) {
+
+            seekBarVolumeControl.let {
+                when (it.visibility) {
                     View.VISIBLE -> it.visibility = View.GONE
                     View.GONE -> it.visibility = View.VISIBLE
                     else -> return@let

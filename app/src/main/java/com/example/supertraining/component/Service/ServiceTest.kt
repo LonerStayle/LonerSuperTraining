@@ -15,6 +15,8 @@ class ServiceTest : Service() {
         const val SERVICE_CHANNEL_ID = "ServiceChannelID"
         const val FORE_GROUND_SERVICE_ID = 191919
         const val MUSIC_CONTROL_MODE_CHECK = "music_control_pause_key"
+        const val MUSIC_SELECT_CHANGE = "music_select_change"
+        const val MUSIC_URI_CHANGE= "music_uri_change"
         const val MUSIC_CONTROL_PLAY_CONTROL = 0
         const val MUSIC_CONTROL_SEEK_TO_NEXT = 1
         const val MUSIC_CONTROL_SEEK_TO_PREV = 2

@@ -14,6 +14,16 @@
         android:background="#88838F">
 
         <Button
+            android:id="@+id/button_narrationChange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:onClick="@{thisFragment::setButtonNarrationChangeClickListener}"
+            android:text="나래이션 소리틀기"
+            app:layout_constraintEnd_toStartOf="@+id/button_volumeControlVisible"
+            app:layout_constraintTop_toTopOf="@+id/button_volumeControlVisible" />
+
+        <Button
             android:id="@+id/button_serviceStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="음악 10초 앞으로 감기"
-            android:onClick="@{thisFragment::setButtonMusicSeekToNext}"
+            android:onClick="@{thisFragment::setButtonMusicSeekToNextClickListener}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_mediaPlayerPause" />
@@ -85,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="음악 10초 뒤로 감기"
-            android:onClick="@{thisFragment::setButtonMusicSeekToPrev}"
+            android:onClick="@{thisFragment::setButtonMusicSeekToPrevClickListener}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_musicSeekToNext" />
@@ -116,6 +126,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_volumeControlVisible" />
+
+        <Button
+            android:id="@+id/button_backgroundMusicPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="배경음악 틀기"
+            android:onClick="@{thisFragment::setButtonBackgroundMusicPlayClickListener}"
+            app:layout_constraintStart_toEndOf="@+id/button_volumeControlVisible"
+            app:layout_constraintTop_toTopOf="@+id/button_volumeControlVisible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
