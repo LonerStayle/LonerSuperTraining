@@ -2,11 +2,11 @@ package com.example.supertraining.view.dest.componenttest
 
 import android.content.*
 import android.media.AudioManager
+import android.os.Bundle
 import android.os.IBinder
 import android.view.View
 import android.widget.SeekBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
 import com.example.supertraining.component.Service.BackgroundNarrationService
@@ -15,6 +15,8 @@ import com.example.supertraining.component.Service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.utill.Contents
+import com.example.supertraining.view.utill.toastShortShow
+import java.nio.channels.SeekableByteChannel
 
 
 class ServiceTestFragment() :
@@ -203,17 +205,41 @@ class ServiceTestFragment() :
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val mMessageReceiver = object : BroadcastReceiver() {
+            override fun onReceive(p0: Context?, intent: Intent?) {
+                val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+                binding.seekBarVolumeControl.progress = binding.seekBarVolumeControl.progress +
+                        intent!!.getIntExtra("volume", 0)
+
+                audio!!.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
+                    binding.seekBarVolumeControl.progress,
+                    0
+                )
+            }
+        }
+
+        context?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(
+                mMessageReceiver,
+                IntentFilter("activity-says-hi")
+            )
+        }
+    }
+
+
     private fun FragmentServiceTestBinding.setVolumeControl() {
         val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
         val currentVolume = audio!!.getStreamVolume(AudioManager.STREAM_MUSIC)
         val maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-
         seekBarVolumeControl.max = maxVolume
         seekBarVolumeControl.progress = currentVolume
         seekBarVolumeControl.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, p2: Boolean) {
-
                 audio.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
             }
 
@@ -227,5 +253,6 @@ class ServiceTestFragment() :
 
         })
     }
+
 
 }
