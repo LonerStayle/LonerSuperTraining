@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.supertraining.component.providers.samaple.Cheese
+import com.example.supertraining.providers.samaple.Cheese
 
 class RecyclerViewCheeseAdapter : RecyclerView.Adapter<RecyclerViewCheeseAdapter.ViewHolder?>() {
     private var cursor: Cursor? = null

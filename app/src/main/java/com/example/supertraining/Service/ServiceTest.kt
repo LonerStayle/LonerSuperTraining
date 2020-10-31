@@ -1,4 +1,4 @@
-package com.example.supertraining.component.Service
+package com.example.supertraining.Service
 
 import android.app.Service
 import android.content.Intent
@@ -14,12 +14,6 @@ class ServiceTest : Service() {
     companion object {
         const val SERVICE_CHANNEL_ID = "ServiceChannelID"
         const val FORE_GROUND_SERVICE_ID = 191919
-        const val MUSIC_CONTROL_MODE_CHECK = "music_control_pause_key"
-        const val MUSIC_SELECT_CHANGE = "music_select_change"
-        const val MUSIC_URI_CHANGE= "music_uri_change"
-        const val MUSIC_CONTROL_PLAY_CONTROL = 0
-        const val MUSIC_CONTROL_SEEK_TO_NEXT = 1
-        const val MUSIC_CONTROL_SEEK_TO_PREV = 2
     }
 
     override fun onCreate() {
@@ -57,20 +51,12 @@ class ServiceTest : Service() {
         return START_REDELIVER_INTENT
     }
 
-    override fun onBind(intent: Intent?): IBinder? {
-        Toast.makeText(
-            this,
-            "프레그먼트에서 왔습니다. onBind를 통해 실행됩니다.",
-            Toast.LENGTH_SHORT
-        ).show()
-
-
-        return null
-    }
 
     override fun onDestroy() {
         Log.d("flowCheck", "Service onDestory 죽음 ")
         super.onDestroy()
     }
+
+    override fun onBind(p0: Intent?) = null
 
 }

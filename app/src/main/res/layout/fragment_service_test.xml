@@ -27,34 +27,22 @@
             android:id="@+id/button_serviceStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="66dp"
-            android:text="시작된 서비스 테스트"
+            android:layout_marginTop="16dp"
             android:onClick="@{(view)->thisFragment.setButtonServiceStartClickListener(view)}"
+            android:text="시작된 서비스 테스트"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_serviceBindStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="바인딩하는 서비스 테스트"
-            android:onClick="@{(view)->thisFragment.setButtonServiceBindStart(view)}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_serviceStart" />
-
-        <Button
             android:id="@+id/button_mediaPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="미디어플레이어 백그라운드 실행 테스트"
             android:onClick="@{thisFragment::setButtonMediaPlayerClickListener}"
+            android:text="미디어플레이어 백그라운드 실행 테스트"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_serviceBindStart" />
+            app:layout_constraintTop_toBottomOf="@+id/button_serviceStart" />
 
         <Button
             android:id="@+id/button_narrationStart"
@@ -126,16 +114,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_volumeControlVisible" />
-
-        <Button
-            android:id="@+id/button_backgroundMusicPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="배경음악 틀기"
-            android:onClick="@{thisFragment::setButtonBackgroundMusicPlayClickListener}"
-            app:layout_constraintStart_toEndOf="@+id/button_volumeControlVisible"
-            app:layout_constraintTop_toTopOf="@+id/button_volumeControlVisible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.example.supertraining.component.providers.samaple
+package com.example.supertraining.providers.samaple
 
 import android.provider.BaseColumns
 

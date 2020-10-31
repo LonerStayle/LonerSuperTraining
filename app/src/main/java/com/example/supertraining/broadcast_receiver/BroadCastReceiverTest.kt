@@ -1,4 +1,4 @@
-package com.example.supertraining.component.broadcast_receiver
+package com.example.supertraining.broadcast_receiver
 
 import android.content.BroadcastReceiver
 import android.content.Context

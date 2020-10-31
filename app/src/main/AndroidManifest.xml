@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
-    <permission android:name="com.example.supertraining.component.providers.provider.READ_WRITE" />
+    <permission android:name="com.example.supertraining.providers.provider.READ_WRITE" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +30,7 @@
 
 
         <receiver
-            android:name="com.example.supertraining.component.broadcast_receiver.BroadCastReceiverTest"
+            android:name="com.example.supertraining.broadcast_receiver.BroadCastReceiverTest"
             android:enabled="true"
             android:exported="true"
             tools:ignore="ExportedReceiver">
@@ -39,7 +39,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".component.broadcast_receiver.AlarmReceiver"
+        <receiver android:name="com.example.supertraining.broadcast_receiver.AlarmReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.example.supertraining" />
@@ -47,20 +47,20 @@
         </receiver>
 
         <provider
-            android:name="com.example.supertraining.component.providers.ContentProviderTest"
-            android:authorities="com.example.supertraining.component.providers.provider"
+            android:name="com.example.supertraining.providers.ContentProviderTest"
+            android:authorities="com.example.supertraining.providers.provider"
             android:exported="true"
             android:permission="com.example.supertraining.componenet.provider.READ_WRITE" />
 
-        <service android:name=".component.Service.AccessibilityServiceTest"
+        <service android:name="com.example.supertraining.Service.AccessibilityServiceTest"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
         </service>
-        <service android:name=".component.Service.ServiceTest"/>
-        <service android:name=".component.Service.BackgroundSoundService"/>
-        <service android:name=".component.Service.BackgroundNarrationService"/>
+        <service android:name="com.example.supertraining.Service.ServiceTest"/>
+        <service android:name="com.example.supertraining.Service.BackgroundSoundService"/>
+        <service android:name="com.example.supertraining.Service.BackgroundNarrationService"/>
     </application>
 
 </manifest>

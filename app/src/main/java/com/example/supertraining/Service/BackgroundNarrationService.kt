@@ -1,4 +1,4 @@
-package com.example.supertraining.component.Service
+package com.example.supertraining.Service
 
 import android.app.Service
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.supertraining.R
-import com.example.supertraining.component.Service.ServiceTest.Companion.SERVICE_CHANNEL_ID
+import com.example.supertraining.Service.ServiceTest.Companion.SERVICE_CHANNEL_ID
 import com.example.supertraining.view.utill.toastShortShow
 
 

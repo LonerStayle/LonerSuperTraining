@@ -1,18 +1,14 @@
 package com.example.supertraining.view.dest.componenttest
 
 import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import android.view.View
-import android.widget.CompoundButton
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.supertraining.R
-import com.example.supertraining.component.broadcast_receiver.AlarmReceiver
 import com.example.supertraining.databinding.FragmentBroadCastTestBinding
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.utill.toastShortShow

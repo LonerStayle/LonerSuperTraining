@@ -1,9 +1,7 @@
-package com.example.supertraining.component.broadcast_receiver
+package com.example.supertraining.broadcast_receiver
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -13,7 +11,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.example.supertraining.R
-import com.example.supertraining.view.activity.MainActivity
 
 class AlarmReceiver : BroadcastReceiver() {
     companion object {

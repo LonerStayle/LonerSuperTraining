@@ -9,27 +9,71 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
-import com.example.supertraining.component.Service.BackgroundNarrationService
-import com.example.supertraining.component.Service.BackgroundSoundService
-import com.example.supertraining.component.Service.ServiceTest
+import com.example.supertraining.Service.BackgroundNarrationService
+import com.example.supertraining.Service.BackgroundSoundService
+import com.example.supertraining.Service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
+import com.example.supertraining.view.pref.PreferencesControl
 import com.example.supertraining.view.utill.Contents
-import com.example.supertraining.view.utill.toastShortShow
-import java.nio.channels.SeekableByteChannel
+import kotlinx.coroutines.*
 
 
 class ServiceTestFragment() :
     BaseFragment<FragmentServiceTestBinding>(R.layout.fragment_service_test) {
 
     private lateinit var bindingService: BackgroundSoundService
+    private var serviceBindUse: Boolean = false
+    private var selectNarrationsSound: String? = null
+    private var startNarrationsSound: String? = null
+
+    private val sampleNarrationSound by lazy {
+        Contents.IMAGE_URL_DEFAULT_FILE_PATH +
+                resources.getIdentifier(
+                    "sound_sample_narration",
+                    "raw",
+                    requireContext().packageName
+                ).toString()
+    }
+
+    private val sampleMusicSound by lazy {
+        Contents.IMAGE_URL_DEFAULT_FILE_PATH +
+                resources.getIdentifier(
+                    "music_sample_background",
+                    "raw",
+                    requireContext().packageName
+                ).toString()
+    }
+
+    private val bindConnection = object : ServiceConnection {
+        override fun onServiceConnected(className: ComponentName, service: IBinder) {
+            val binder = service as BackgroundSoundService.LocalBinder
+            bindingService = binder.getService()
+            serviceBindUse = true
+        }
+
+        override fun onServiceDisconnected(arg0: ComponentName) {
+            serviceBindUse = false
+        }
+    }
+
+    private val audio by lazy { context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager? }
 
     override fun FragmentServiceTestBinding.setDataBind() {
         this.thisFragment = this@ServiceTestFragment
         setBroadCastReceiver()
         setVolumeControl()
 
+        Intent(requireContext(), BackgroundSoundService::class.java).let {
+            context?.bindService(
+                it,
+                bindConnection,
+                Context.BIND_AUTO_CREATE
+            )
+        }
+
     }
+
 
     private fun setBroadCastReceiver() {
         // 싱글톤 단점을  억지로 막는법.. 값을 보내는 쪽에서 count를 둔다. 그럴러면 아래걸 지우고 service쪽에 둬야함
@@ -50,23 +94,6 @@ class ServiceTestFragment() :
             .registerReceiver(messageReceiver, IntentFilter("intent_action"))
     }
 
-    fun setButtonServiceBindStart(v: View) {
-        val bindServiceConnection = object : ServiceConnection {
-            override fun onServiceConnected(p0: ComponentName?, p1: IBinder?) {}
-            override fun onServiceDisconnected(p0: ComponentName?) {
-                Toast.makeText(
-                    requireContext(),
-                    "예기치 못한 사정으로 바인드 연결이 끊겼습니다.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-        requireContext().bindService(
-            Intent(requireContext(), ServiceTest::class.java),
-            bindServiceConnection,
-            Context.BIND_AUTO_CREATE
-        )
-    }
 
     fun setButtonMediaPlayerClickListener(v: View) {
         val intent = Intent(requireContext(), BackgroundSoundService::class.java)
@@ -88,111 +115,128 @@ class ServiceTestFragment() :
 
 
     fun setButtonMediaPlayerPauseClickListener(v: View) {
-        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-        intent.putExtra(
-            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
-            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
-        )
-        requireContext().startService(intent)
-//        val bindServiceConnection = object : ServiceConnection {
-//            override fun onServiceConnected(componentName: ComponentName?, iBinder: IBinder?) {
-//                val binder = iBinder as BackgroundSoundService.LocalBinder
-//                bindingService = binder.getService()
-//
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    delay(200L)
-//                    bindingService.let {
-//                        if (it.mediaPlayer.isPlaying)
-//                            it.mediaPlayer.pause()
-//                        else
-//                            it.mediaPlayer.start()
-//                    }
-//                }
-//            }
-//
-//            override fun onServiceDisconnected(componentName: ComponentName?) {
-//            }
-//        }
+        PreferencesControl.getInstance(requireContext()).setNarrationSoundPath = sampleMusicSound
 
-//        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-//        context?.bindService(
-//            intent,
-//            bindServiceConnection,
-//            Context.BIND_AUTO_CREATE
-//        )
+        bindingService.let {
 
+            //선택한 사운드
+            selectNarrationsSound =
+                PreferencesControl.getInstance(requireContext()).setNarrationSoundPath
+
+            //음악이 흐르는 사운드
+            startNarrationsSound =
+                PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath
+
+            when {
+                //음악을 맨 처음 시작했을때 혹은 음악을 변경했을때
+                !PreferencesControl.getInstance(requireContext()).appFirstMusicPlay -> {
+                    PreferencesControl.getInstance(requireContext()).appFirstMusicPlay = true
+
+                    Intent(context, BackgroundSoundService::class.java).let {intent->
+                        intent.putExtra("music",sampleMusicSound)
+                        context?.startService(intent)
+                    }
+                    PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath =
+                        selectNarrationsSound
+                }
+
+
+                //음악 체인지
+                selectNarrationsSound != startNarrationsSound -> {
+                    it.setSoundChange(sampleMusicSound)
+
+                    PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath =
+                        selectNarrationsSound
+                    return@let
+                }
+
+                //현재 음악 플레이 중 일때
+                        it.mediaPlayer.isPlaying -> {
+                    it.mediaPlayer.pause()
+                }
+
+                //현재 음악이 멈춰 있을 때
+                        !it.mediaPlayer.isPlaying -> {
+                    it.mediaPlayer.start()
+                }
+
+            }
+        }
+
+
+    }
+
+    fun setButtonNarrationChangeClickListener(v: View) {
+
+        PreferencesControl.getInstance(requireContext()).setNarrationSoundPath =
+            sampleNarrationSound
+
+        bindingService.let { it ->
+            //선택한 사운드
+            selectNarrationsSound =
+                PreferencesControl.getInstance(requireContext()).setNarrationSoundPath
+
+            //음악이 흐르는 사운드
+            startNarrationsSound =
+                PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath
+
+            when {
+                //음악을 맨 처음 시작했을때
+                !PreferencesControl.getInstance(requireContext()).appFirstMusicPlay -> {
+                    PreferencesControl.getInstance(requireContext()).appFirstMusicPlay = true
+
+                    Intent(context, BackgroundSoundService::class.java).let { intent ->
+                        intent.putExtra("music",sampleNarrationSound)
+                        context?.startService(intent)
+                    }
+
+                    PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath =
+                        startNarrationsSound
+
+                }
+
+                //음악을 변경할 때
+                selectNarrationsSound != startNarrationsSound -> {
+                    it.setSoundChange(sampleNarrationSound)
+
+                    PreferencesControl.getInstance(requireContext()).setStartNarrationsSoundPath =
+                        selectNarrationsSound
+                    return@let
+                }
+
+                //현재 음악 플레이 중 일때
+                it.mediaPlayer.isPlaying -> {
+
+                    it.mediaPlayer.pause()
+                }
+
+                //현재 음악이 멈춰 있을 때
+                !it.mediaPlayer.isPlaying -> {
+
+                    it.mediaPlayer.start()
+                }
+
+            }
+        }
 
     }
 
     fun setButtonMusicSeekToPrevClickListener(v: View) {
-        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-        intent.putExtra(
-            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
-            ServiceTest.MUSIC_CONTROL_SEEK_TO_PREV
-        )
-        requireContext().startService(intent)
+
+        bindingService.let {
+            it.mediaPlayer.seekTo(it.mediaPlayer.currentPosition - 5000)
+        }
     }
 
     fun setButtonMusicSeekToNextClickListener(v: View) {
-        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-        intent.putExtra(
-            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
-            ServiceTest.MUSIC_CONTROL_SEEK_TO_NEXT
-        )
-        requireContext().startService(intent)
+        bindingService.let {
+            it.mediaPlayer.seekTo(it.mediaPlayer.currentPosition + 5000)
+        }
     }
 
-    fun setButtonNarrationChangeClickListener(v: View) {
-        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-
-        intent.putExtra(
-            ServiceTest.MUSIC_SELECT_CHANGE,
-            true
-        )
-        intent.putExtra(
-            ServiceTest.MUSIC_URI_CHANGE,
-            Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                "sound_sample_narration",
-                "raw",
-                requireContext().packageName
-            ).toString()
-        )
-
-
-        intent.putExtra(
-            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
-            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
-        )
-
-        requireContext().startService(intent)
-    }
-
-    fun setButtonBackgroundMusicPlayClickListener(v: View) {
-        val intent = Intent(requireContext(), BackgroundSoundService::class.java)
-        intent.putExtra(
-            ServiceTest.MUSIC_SELECT_CHANGE,
-            true
-        )
-        intent.putExtra(
-            ServiceTest.MUSIC_URI_CHANGE,
-            Contents.IMAGE_URL_DEFAULT_FILE_PATH + resources.getIdentifier(
-                "music_sample_background",
-                "raw",
-                requireContext().packageName
-            ).toString()
-        )
-
-        intent.putExtra(
-            ServiceTest.MUSIC_CONTROL_MODE_CHECK,
-            ServiceTest.MUSIC_CONTROL_PLAY_CONTROL
-        )
-
-        requireContext().startService(intent)
-    }
 
     fun setButtonVolumeControlVisibleClickListener(v: View) {
         with(binding) {
-
             seekBarVolumeControl.let {
                 when (it.visibility) {
                     View.VISIBLE -> it.visibility = View.GONE
@@ -200,47 +244,23 @@ class ServiceTestFragment() :
                     else -> return@let
                 }
             }
-
-        }
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val mMessageReceiver = object : BroadcastReceiver() {
-            override fun onReceive(p0: Context?, intent: Intent?) {
-                val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
-                binding.seekBarVolumeControl.progress = binding.seekBarVolumeControl.progress +
-                        intent!!.getIntExtra("volume", 0)
-
-                audio!!.setStreamVolume(
-                    AudioManager.STREAM_MUSIC,
-                    binding.seekBarVolumeControl.progress,
-                    0
-                )
-            }
-        }
-
-        context?.let {
-            LocalBroadcastManager.getInstance(it).registerReceiver(
-                mMessageReceiver,
-                IntentFilter("activity-says-hi")
-            )
         }
     }
 
 
     private fun FragmentServiceTestBinding.setVolumeControl() {
-        val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
-        val currentVolume = audio!!.getStreamVolume(AudioManager.STREAM_MUSIC)
-        val maxVolume = audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-        seekBarVolumeControl.max = maxVolume
-        seekBarVolumeControl.progress = currentVolume
+        seekBarVolumeControl.max = audio!!.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+        seekBarVolumeControl.progress = audio!!.getStreamVolume(AudioManager.STREAM_MUSIC)
+
         seekBarVolumeControl.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, p2: Boolean) {
-                audio.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0)
+
+                audio!!.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
+                    progress,
+                    AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE
+                )
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -252,7 +272,58 @@ class ServiceTestFragment() :
             }
 
         })
+
     }
 
+//    open class VolumeChangeObserver(handler: Handler?) :
+//        ContentObserver(handler) {
+//         var volume:Int? =null
+//
+//        override fun onChange(selfChange: Boolean) {
+//            super.onChange(selfChange)
+//            onChangeLogic(volume)
+//
+//        }
+//
+//        open fun onChangeLogic(volume: Int?) = Unit
+//    }
+
+    //별로임
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//
+//        super.onViewCreated(view, savedInstanceState)
+
+//        val mMessageReceiver = object : BroadcastReceiver() {
+//            override fun onReceive(p0: Context?, intent: Intent?) {
+//                val audio = context?.getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+//                binding.seekBarVolumeControl.progress = binding.seekBarVolumeControl.progress +
+//                        intent!!.getIntExtra("volume", 0)
+//
+//                audio!!.setStreamVolume(
+//                    AudioManager.STREAM_MUSIC,
+//                    binding.seekBarVolumeControl.progress,
+//                    0
+//                )
+//            }
+//        }
+//
+//        context?.let {
+//            LocalBroadcastManager.getInstance(it).registerReceiver(
+//                mMessageReceiver,
+//                IntentFilter("activity-says-hi")
+//            )
+//        }
+//    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //api25 이하는 원래 해제를 따로 해줘야하지만, 지금 이앱에서는 해제시에 바인딩 된 음악도 해제되기 때문에 주석처리.
+        if (android.os.Build.VERSION.SDK_INT <= android.os.Build.VERSION_CODES.N_MR1)
+            context?.unbindService(bindConnection)
+
+        //테스트용 코드 정말 cancle 해줌. 음
+//        ioScope.cancel()
+    }
 
 }

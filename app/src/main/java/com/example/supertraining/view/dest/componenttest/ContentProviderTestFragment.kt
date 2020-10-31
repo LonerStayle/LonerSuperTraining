@@ -16,8 +16,8 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.supertraining.R
-import com.example.supertraining.component.providers.ContentProviderTest
-import com.example.supertraining.component.providers.samaple.Cheese
+import com.example.supertraining.providers.ContentProviderTest
+import com.example.supertraining.providers.samaple.Cheese
 import com.example.supertraining.databinding.FragmentContentProviderTestBinding
 import com.example.supertraining.view.adapter.RecyclerViewCheeseAdapter
 import com.example.supertraining.view.base.BaseFragment
