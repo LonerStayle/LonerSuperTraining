@@ -1,4 +1,4 @@
-package com.example.supertraining.view.dest.componenttest
+package com.example.supertraining.view.dest.component_test
 
 import android.annotation.SuppressLint
 import android.content.ContentUris
@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.ContactsContract
+import android.provider.Telephony.Mms.Part.CONTENT_ID
 import android.util.Log
 import android.view.View
 import android.widget.SimpleAdapter
@@ -46,7 +47,6 @@ class ContentProviderTestFragment :
         populateInitialDataIfNeeded()
         setLoaderManager()
         setRecyclerViewAdapter()
-
     }
 
     override fun FragmentContentProviderTestBinding.setClickListener() {}
@@ -64,11 +64,9 @@ class ContentProviderTestFragment :
     }
 
 
-
-
     fun setButtonTextFileCreateTestClickLister(v: View) {
 
-        tedPermissionCheck(requireContext()){
+        tedPermissionCheck(requireContext()) {
             val absolutePath = "/storage/emulated/0/"
 //       Original filePath
             Environment.getExternalStorageDirectory().absolutePath
@@ -93,7 +91,6 @@ class ContentProviderTestFragment :
     }
 
 
-
     fun setButtonContentResolverStartClickListener(v: View) {
         tedPermissionCheck(requireContext()) {
             contentResolverUse()
@@ -106,25 +103,27 @@ class ContentProviderTestFragment :
 
         val dataList = ArrayList<Map<String, String>>()
 
-        val cursor = requireActivity().contentResolver.query(
+        //커서 생성
+        val cursor = context?.contentResolver?.query(
             ContactsContract.Contacts.CONTENT_URI,
             null, null, null,
-            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + " asc"
+            ContactsContract.Contacts.DISPLAY_NAME_PRIMARY + "asc"
         )
 
         while (cursor!!.moveToNext()) {
             val map = HashMap<String, String>()
             // 연락처 id 값
             val id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID))
+
             // 연락처 대표 이름
             val name =
                 cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME_PRIMARY))
+
             map["name"] = name
 
-            // ID로 전화 정보 조회
-            val phoneCursor: Cursor? = requireActivity().contentResolver.query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                null,
+            //ID로 전화번호 조회
+            val phoneCursor: Cursor? = context?.contentResolver?.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
                 ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id,
                 null, null
             )
@@ -138,8 +137,9 @@ class ContentProviderTestFragment :
             }
             phoneCursor.close()
             dataList.add(map)
-        } // end while
+        }
         cursor.close()
+
         val adapter = SimpleAdapter(
             requireContext(),
             dataList,

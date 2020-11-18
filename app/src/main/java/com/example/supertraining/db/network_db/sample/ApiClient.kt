@@ -1,10 +1,7 @@
-package com.example.supertraining.db.network_db
+package com.example.supertraining.db.network_db.sample
 
-import com.example.supertraining.db.network_db.dataholder.User
+import com.example.supertraining.db.network_db.sample.dataholder.User
 import com.google.gson.JsonElement
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*

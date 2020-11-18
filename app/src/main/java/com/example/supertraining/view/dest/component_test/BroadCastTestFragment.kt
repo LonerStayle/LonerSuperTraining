@@ -1,4 +1,4 @@
-package com.example.supertraining.view.dest.componenttest
+package com.example.supertraining.view.dest.component_test
 
 import android.app.AlarmManager
 import android.content.Context.ALARM_SERVICE

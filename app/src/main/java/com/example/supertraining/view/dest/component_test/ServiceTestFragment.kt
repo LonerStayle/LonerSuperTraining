@@ -1,8 +1,7 @@
-package com.example.supertraining.view.dest.componenttest
+package com.example.supertraining.view.dest.component_test
 
 import android.content.*
 import android.media.AudioManager
-import android.os.Bundle
 import android.os.IBinder
 import android.view.View
 import android.widget.SeekBar
@@ -16,7 +15,6 @@ import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.pref.PreferencesControl
 import com.example.supertraining.view.utill.Contents
-import kotlinx.coroutines.*
 
 
 class ServiceTestFragment() :
@@ -162,8 +160,6 @@ class ServiceTestFragment() :
 
             }
         }
-
-
     }
 
     fun setButtonNarrationChangeClickListener(v: View) {
@@ -264,7 +260,6 @@ class ServiceTestFragment() :
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
@@ -284,7 +279,6 @@ class ServiceTestFragment() :
 //            onChangeLogic(volume)
 //
 //        }
-//
 //        open fun onChangeLogic(volume: Int?) = Unit
 //    }
 

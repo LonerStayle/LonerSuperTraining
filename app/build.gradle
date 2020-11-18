@@ -27,6 +27,8 @@ android {
         jvmTarget = "1.8"
     }
 
+    androidExtensions { experimental = true }
+    
     buildTypes {
         release {
             minifyEnabled false

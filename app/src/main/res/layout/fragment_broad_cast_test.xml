@@ -6,7 +6,7 @@
     <data>
         <variable
             name="broadCastTest"
-            type="com.example.supertraining.view.dest.componenttest.BroadCastTestFragment" />
+            type="com.example.supertraining.view.dest.component_test.BroadCastTestFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,12 +1,8 @@
 package com.example.supertraining.repository
 
-import android.util.Log
-import com.example.supertraining.db.network_db.ApiClient
-import com.example.supertraining.db.network_db.dataholder.User
+import com.example.supertraining.db.network_db.sample.ApiClient
+import com.example.supertraining.db.network_db.sample.dataholder.User
 import com.google.gson.JsonElement
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 interface DataSource {

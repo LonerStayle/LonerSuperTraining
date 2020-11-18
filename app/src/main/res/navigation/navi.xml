@@ -32,15 +32,15 @@
         android:label="NaviTestFragment" />
     <fragment
         android:id="@+id/serviceTestFragment"
-        android:name="com.example.supertraining.view.dest.componenttest.ServiceTestFragment"
+        android:name="com.example.supertraining.view.dest.component_test.ServiceTestFragment"
         android:label="ServiceTestFragment" />
     <fragment
         android:id="@+id/broadCastTestFragment"
-        android:name="com.example.supertraining.view.dest.componenttest.BroadCastTestFragment"
+        android:name="com.example.supertraining.view.dest.component_test.BroadCastTestFragment"
         android:label="BroadCastTestFragment" />
     <fragment
         android:id="@+id/contentProviderTest"
-        android:name="com.example.supertraining.view.dest.componenttest.ContentProviderTestFragment"
+        android:name="com.example.supertraining.view.dest.component_test.ContentProviderTestFragment"
         android:label="ContentProviderTest" />
     <fragment
         android:id="@+id/searchViewTestFragment"

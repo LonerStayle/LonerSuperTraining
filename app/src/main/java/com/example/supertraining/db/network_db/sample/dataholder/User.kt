@@ -1,6 +1,5 @@
-package com.example.supertraining.db.network_db.dataholder
+package com.example.supertraining.db.network_db.sample.dataholder
 
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 data class User(

@@ -6,8 +6,12 @@
     <data>
 
         <variable
-            name="vm"
+            name="netWorkVM"
             type="com.example.supertraining.viewmodel.NetworkViewModel" />
+
+        <variable
+            name="theWalkerVM"
+            type="com.example.supertraining.viewmodel.TheWalkerViewModel" />
 
         <variable
             name="thisFragment"
@@ -32,7 +36,7 @@
             android:id="@+id/button_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{()->vm.userRegister(thisFragment.setUserData(),thisFragment.jsonCallback)}"
+            android:onClick="@{()->netWorkVM.userRegister(thisFragment.setUserData())}"
             android:text="회원가입"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:onClick="@{()->vm.userCheck(thisFragment.setUserData())}"
+            android:onClick="@{()->netWorkVM.userCheck(thisFragment.setUserData())}"
             android:text="유저 확인"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_register"
@@ -82,5 +86,23 @@
             android:inputType="textPersonName"
             app:layout_constraintStart_toStartOf="@+id/editText_passwordSignUp"
             app:layout_constraintTop_toBottomOf="@+id/editText_passwordSignUp" />
+
+        <Button
+            android:id="@+id/button_theWalkerLoginTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더워커 로그인 테스트"
+            android:onClick="@{()->theWalkerVM.snsLogin(thisFragment.setPush())}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_getWalkCourseList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="더워커 산책리스트 가져오기"
+            android:onClick="@{thisFragment::click}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

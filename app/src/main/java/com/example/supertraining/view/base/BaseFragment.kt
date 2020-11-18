@@ -12,16 +12,9 @@ import androidx.fragment.app.viewModels
 import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.viewmodel.NetworkViewModel
 import com.example.supertraining.viewmodel.TestViewModel
-import com.example.supertraining.viewmodel.TestViewModelFactory
+import com.example.supertraining.viewmodel.factory.ViewModelFactory
 
 abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): Fragment() {
-
-    protected val mainViewModel by viewModels<TestViewModel> {
-        val testDatabase = TestDataBase.getInstance(requireContext())
-        val factory = TestViewModelFactory(testDatabase.dataSource)
-        factory
-    }
-    protected val networkViewModel by viewModels<NetworkViewModel>()
 
     lateinit var binding:VDB
     override fun onCreateView(

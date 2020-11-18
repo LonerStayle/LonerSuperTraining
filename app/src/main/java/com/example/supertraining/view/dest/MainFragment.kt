@@ -3,14 +3,24 @@ package com.example.supertraining.view.dest
 import android.content.Intent
 import android.provider.Settings
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentMainBinding
+import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 import com.example.supertraining.view.adapter.RecyclerViewMainAdapter
 import com.example.supertraining.view.base.BaseFragment
+import com.example.supertraining.viewmodel.TestViewModel
+import com.example.supertraining.viewmodel.factory.ViewModelFactory
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+
+    private val mainViewModel by viewModels<TestViewModel> {
+        val testDatabase = TestDataBase.getInstance(requireContext())
+        val factory = ViewModelFactory(testDatabase.dataSource)
+        factory
+    }
 
     override fun FragmentMainBinding.setDataBind() {
         main = this@MainFragment

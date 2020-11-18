@@ -6,7 +6,7 @@
     <data>
         <variable
             name="contentProviderTest"
-            type="com.example.supertraining.view.dest.componenttest.ContentProviderTestFragment" />
+            type="com.example.supertraining.view.dest.component_test.ContentProviderTestFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
