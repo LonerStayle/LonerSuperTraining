@@ -31,6 +31,8 @@ buildscript {
         def klaxon_version = '5.0.1'
 
         def permissionDispatcherVersion = '4.8.0'
+        def googleLocationVersion = '17.0.0'
+        def naverMapVersion = '3.10.0'
 
         libraries = [
                 //kotlin 기본 라이브러리
@@ -91,7 +93,14 @@ buildscript {
                 //String To JsonObject
                 "com.beust:klaxon:$klaxon_version",
 
-                "org.permissionsdispatcher:permissionsdispatcher:$permissionDispatcherVersion"
+                //퍼미션 디스패쳐
+                "org.permissionsdispatcher:permissionsdispatcher:$permissionDispatcherVersion",
+
+                //구글 로케이션
+                "com.google.android.gms:play-services-location:$googleLocationVersion",
+
+                //naverMap
+                 "com.naver.maps:map-sdk:$naverMapVersion"
 
         ]
 
@@ -137,6 +146,9 @@ allprojects {
         google()
         jcenter()
 
+        maven {
+            url 'https://navercorp.bintray.com/maps'
+        }
 // 디스패쳐
         maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
         //카카오톡

@@ -68,4 +68,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         })
     }
 
+    fun setButtonGoToTheGeoFencingClickListener(v:View){
+        findNavController().navigate(R.id.action_mainFragment_to_geoFencingTestFragment)
+    }
+
 }

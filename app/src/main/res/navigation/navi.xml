@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_mainFragment_to_retroFitTestFragment"
             app:destination="@id/retroFitTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_serviceTestFragment2"
+            app:destination="@id/serviceTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_geoFencingTestFragment"
+            app:destination="@id/geoFencingTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/naviTestFragment"
@@ -50,4 +56,8 @@
         android:id="@+id/retroFitTestFragment"
         android:name="com.example.supertraining.view.dest.RetroFitTestFragment"
         android:label="RetroFitTestFragment" />
+    <fragment
+        android:id="@+id/geoFencingTestFragment"
+        android:name="com.example.supertraining.view.dest.GeoFencingTestFragment"
+        android:label="GeoFencingTestFragment" />
 </navigation>

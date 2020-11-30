@@ -66,7 +66,7 @@ class ContentProviderTestFragment :
 
     fun setButtonTextFileCreateTestClickLister(v: View) {
 
-        tedPermissionCheck(requireContext()) {
+        context?.tedPermissionCheck {
             val absolutePath = "/storage/emulated/0/"
 //       Original filePath
             Environment.getExternalStorageDirectory().absolutePath
@@ -92,7 +92,7 @@ class ContentProviderTestFragment :
 
 
     fun setButtonContentResolverStartClickListener(v: View) {
-        tedPermissionCheck(requireContext()) {
+        context?.tedPermissionCheck {
             contentResolverUse()
         }
 

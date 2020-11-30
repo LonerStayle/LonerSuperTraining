@@ -21,6 +21,7 @@ class SearchViewTestFragment :
         val factory = ViewModelFactory(testDatabase.dataSource)
         factory
     }
+
     lateinit var adapter: RecyclerViewSearchTestAdapter
     private var dataList: MutableList<RoomEntityTest>? = null
 

@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
             this@MainActivity,
             R.layout.activity_main
         ).run {
-            PreferencesControl.getInstance(this@MainActivity).appFirstMusicPlay = false
 
-            tedPermissionCheck(this@MainActivity) { toastShortShow("ㅎㅇ") }
+            PreferencesControl.getInstance(this@MainActivity).appFirstMusicPlay = false
+            tedPermissionCheck { toastShortShow("ㅎㅇ") }
             root
         }
     }
