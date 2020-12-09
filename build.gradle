@@ -34,6 +34,8 @@ buildscript {
         def googleLocationVersion = '17.0.0'
         def naverMapVersion = '3.10.0'
 
+        def beaconVerson = '2+'
+
         libraries = [
                 //kotlin 기본 라이브러리
                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
@@ -100,7 +102,9 @@ buildscript {
                 "com.google.android.gms:play-services-location:$googleLocationVersion",
 
                 //naverMap
-                 "com.naver.maps:map-sdk:$naverMapVersion"
+                 "com.naver.maps:map-sdk:$naverMapVersion",
+
+                 "org.altbeacon:android-beacon-library:$beaconVerson"
 
         ]
 

@@ -8,9 +8,9 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.supertraining.R
-import com.example.supertraining.Service.BackgroundNarrationService
-import com.example.supertraining.Service.BackgroundSoundService
-import com.example.supertraining.Service.ServiceTest
+import com.example.supertraining.service.BackgroundNarrationService
+import com.example.supertraining.service.BackgroundSoundService
+import com.example.supertraining.service.ServiceTest
 import com.example.supertraining.databinding.FragmentServiceTestBinding
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.pref.PreferencesControl
@@ -109,6 +109,7 @@ class ServiceTestFragment() :
                 BackgroundNarrationService::class.java
             )
         )
+
     }
 
 

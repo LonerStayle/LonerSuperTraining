@@ -2,6 +2,7 @@ package com.example.supertraining.viewmodel
 
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
+import com.example.supertraining.db.UserRssi
 import com.example.supertraining.db.locale_db.dao.RoomDaoTest
 import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 import com.example.supertraining.repository.LocaleRepository

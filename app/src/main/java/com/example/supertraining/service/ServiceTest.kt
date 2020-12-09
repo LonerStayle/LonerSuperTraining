@@ -1,10 +1,8 @@
-package com.example.supertraining.Service
+package com.example.supertraining.service
 
 import android.app.Service
 import android.content.Intent
-import android.os.IBinder
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDeepLinkBuilder

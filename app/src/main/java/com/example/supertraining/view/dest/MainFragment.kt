@@ -72,4 +72,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         findNavController().navigate(R.id.action_mainFragment_to_geoFencingTestFragment)
     }
 
+    fun setButtonGoToTheBeaconTestClickListener(v:View){
+        findNavController().navigate(R.id.action_mainFragment_to_beaconTestFragment)
+    }
 }

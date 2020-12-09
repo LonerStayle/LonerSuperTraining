@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <permission android:name="com.example.supertraining.providers.provider.READ_WRITE" />
 
@@ -57,15 +58,16 @@
             android:exported="true"
             android:permission="com.example.supertraining.componenet.provider.READ_WRITE" />
 
-        <service android:name="com.example.supertraining.Service.AccessibilityServiceTest"
+        <service android:name="com.example.supertraining.service.AccessibilityServiceTest"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
         </service>
-        <service android:name="com.example.supertraining.Service.ServiceTest"/>
-        <service android:name="com.example.supertraining.Service.BackgroundSoundService"/>
-        <service android:name="com.example.supertraining.Service.BackgroundNarrationService"/>
+        <service android:name="com.example.supertraining.service.ServiceTest"/>
+        <service android:name="com.example.supertraining.service.BackgroundSoundService"/>
+        <service android:name="com.example.supertraining.service.BackgroundNarrationService"/>
+        <service android:name=".service.BeaconService"/>
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"

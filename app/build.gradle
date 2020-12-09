@@ -42,6 +42,12 @@ android {
     buildFeatures {
         dataBinding true
     }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -53,7 +59,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation testLibraries
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-
+    implementation files('libs/minewBeaconScan.jar')
 
 
 

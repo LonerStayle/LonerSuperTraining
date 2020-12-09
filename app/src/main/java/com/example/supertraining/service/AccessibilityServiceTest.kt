@@ -1,4 +1,4 @@
-package com.example.supertraining.Service
+package com.example.supertraining.service
 
 import android.accessibilityservice.AccessibilityService
 import android.view.accessibility.AccessibilityEvent

@@ -22,7 +22,8 @@ class BroadCastTestFragment :
         .setGraph(R.navigation.navi)
         .setDestination(R.id.mainFragment)
         .setDestination(R.id.broadCastTestFragment)
-        .createPendingIntent()}
+        .createPendingIntent()
+    }
 
     override fun FragmentBroadCastTestBinding.setDataBind() {
         broadCastTest = this@BroadCastTestFragment

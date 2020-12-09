@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_mainFragment_to_geoFencingTestFragment"
             app:destination="@id/geoFencingTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_beaconTestFragment"
+            app:destination="@id/beaconTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/naviTestFragment"
@@ -60,4 +63,8 @@
         android:id="@+id/geoFencingTestFragment"
         android:name="com.example.supertraining.view.dest.GeoFencingTestFragment"
         android:label="GeoFencingTestFragment" />
+    <fragment
+        android:id="@+id/beaconTestFragment"
+        android:name="com.example.supertraining.view.dest.BeaconTestFragment"
+        android:label="BeaconTestFragment" />
 </navigation>
