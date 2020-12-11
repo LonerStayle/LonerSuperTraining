@@ -30,9 +30,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="i4전용 비콘 라이브러리"
-
+        android:onClick="@{beaconTestFragment::setButtonIBeaconSdkClickListener}"
         app:layout_constraintStart_toEndOf="@+id/button_altBeaconLibrary"
         app:layout_constraintTop_toTopOf="@+id/button_altBeaconLibrary" />
+    <Button
+        android:id="@+id/button_estimoteUse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="@{beaconTestFragment::setButtonEstimoteUseClickListener}"
+        android:text="Estimote 라이브러리"
+        app:layout_constraintStart_toStartOf="@+id/button_iBeaconSdk"
+        app:layout_constraintTop_toBottomOf="@+id/button_iBeaconSdk" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_i_beaconTest"
@@ -54,6 +63,8 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_i_beaconTest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

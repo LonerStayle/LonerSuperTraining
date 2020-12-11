@@ -9,6 +9,7 @@
         <variable
             name="beacon"
             type="com.minew.beacon.MinewBeacon" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +65,16 @@
             android:layout_marginTop="8dp"
             android:hint="Bettery"
             android:text="@{beacon.getBeaconValue(BeaconValueIndex.MinewBeaconValueIndex_BatteryLevel).getStringValue()}"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@{beacon.getBeaconValue(BeaconValueIndex.MinewBeaconValueIndex_TxPower).getStringValue()}"
+            android:hint="TxPower"
             app:layout_constraintStart_toStartOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 

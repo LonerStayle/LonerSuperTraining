@@ -34,7 +34,8 @@ buildscript {
         def googleLocationVersion = '17.0.0'
         def naverMapVersion = '3.10.0'
 
-        def beaconVerson = '2+'
+        def beaconVersion = '2+'
+        def estimoteVersion = '1.0.5'
 
         libraries = [
                 //kotlin 기본 라이브러리
@@ -103,8 +104,11 @@ buildscript {
 
                 //naverMap
                  "com.naver.maps:map-sdk:$naverMapVersion",
+                //알트 비콘
+                 "org.altbeacon:android-beacon-library:$beaconVersion",
 
-                 "org.altbeacon:android-beacon-library:$beaconVerson"
+                //estimote 라이브러리
+                "com.estimote:proximity-sdk:$estimoteVersion"
 
         ]
 

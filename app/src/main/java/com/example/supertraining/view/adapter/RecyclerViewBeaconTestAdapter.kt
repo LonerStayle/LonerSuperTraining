@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.supertraining.R
 import com.example.supertraining.databinding.ViewholderBeaconTestBinding
+import com.example.supertraining.view.utill.getDistance
+import com.minew.beacon.BeaconValueIndex
 import com.minew.beacon.MinewBeacon
 
 class RecyclerViewBeaconTestAdapter :
@@ -33,8 +35,8 @@ class RecyclerViewBeaconTestAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding?.apply {
             beacon = beaconList[position]
+
         }
     }
-
     override fun getItemCount() = beaconList.size
 }

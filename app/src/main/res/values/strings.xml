@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">로너 슈퍼 트레이닝</string>
-
+    
     <string-array name="testList">
         <item>11111111111111</item>
         <item>123333</item>
@@ -9,4 +9,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="retrofitTest_textUserData">아이디:(%s), 이메일:(%s)</string>
+    
+    <string name="estimote_app_id"/>
+    <string name="estimote_app_token"/>
 </resources>
