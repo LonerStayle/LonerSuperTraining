@@ -40,7 +40,7 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
 
     companion object {
         const val IBEACON_LAYOUT = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"
-        const val REQUEST_ENABLE_BT = 4444
+
 //        "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"
 //        "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"
     }
@@ -51,6 +51,7 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
     private lateinit var bindConnection: ServiceConnection
     private lateinit var observationHandler: ProximityObserver.Handler
     private lateinit var consumer: BeaconConsumer
+
     override fun FragmentBeaconTestBinding.setDataBind() {
         this.beaconTestFragment = this@BeaconTestFragment
         setBluetoothAdapter()
@@ -228,7 +229,9 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
 
                 mMinewBeaconManager = MinewBeaconManager.getInstance(requireContext())
                 setInitService()
+
                 mMinewBeaconManager!!.startScan()
+
                 mMinewBeaconManager!!.setDeviceManagerDelegateListener(object :
                     MinewBeaconManagerListener {
 
@@ -242,6 +245,9 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
 
                     override fun onRangeBeacons(minewBeacons: MutableList<MinewBeacon>?) {
                         Log.d("salusTest_1second_scan", "1초마다 스캔중 일때 호출")
+
+                        val busList =
+                            minewBeacons?.filter { it.getBeaconValue(BeaconValueIndex.MinewBeaconValueIndex_RSSI).intValue > -470 }
 
 
                         if (!isResumed)
@@ -276,6 +282,7 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
         beaconManager?.bind(consumer)
 
     }
+
     private fun enableDisableBT() {
         if (bluetoothAdapter == null)
             Log.d("blueToothNullCheck", "잡힌 블루투스가 하나도 없습니다.")
@@ -284,6 +291,7 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
             Log.d("blueToothNullCheck", "블루투스가 활성화를 시도합니다.")
             val enableBTIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             startActivity(enableBTIntent)
+
             val bTIntent = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
             context?.registerReceiver(mBroadCastReceiver, bTIntent)
         }
@@ -297,21 +305,21 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
 
                     BluetoothAdapter.STATE_ON ->
                         Log.d(
-                        "blueToothChangeCheck",
-                        "onReceive State Off"
-                    )
+                            "blueToothChangeCheck",
+                            "onReceive State Off"
+                        )
 
                     BluetoothAdapter.STATE_OFF ->
                         Log.d(
-                        "blueToothChangeCheck",
-                        "이곳에서 TTS처리"
-                    )
+                            "blueToothChangeCheck",
+                            "이곳에서 TTS처리"
+                        )
 
                     BluetoothAdapter.STATE_TURNING_ON ->
                         Log.d(
-                        "blueToothChangeCheck",
-                        "onReceive turning on"
-                    )
+                            "blueToothChangeCheck",
+                            "onReceive turning on"
+                        )
 
                     BluetoothAdapter.STATE_TURNING_OFF -> {
                         enableDisableBT()
@@ -324,7 +332,6 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
             }
         }
     }
-
 
 
     override fun onResume() {
