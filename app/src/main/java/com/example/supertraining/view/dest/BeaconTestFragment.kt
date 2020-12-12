@@ -4,15 +4,14 @@ import android.app.Activity
 import android.app.Notification
 import android.app.PendingIntent
 import android.bluetooth.BluetoothAdapter
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
 import android.os.IBinder
 import android.os.RemoteException
 import android.util.Log
 import android.view.View
+import androidx.activity.addCallback
 import androidx.core.app.NotificationCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.estimote.proximity_sdk.api.EstimoteCloudCredentials
 import com.estimote.proximity_sdk.api.ProximityObserver
@@ -20,12 +19,15 @@ import com.estimote.proximity_sdk.api.ProximityObserverBuilder
 import com.estimote.proximity_sdk.api.ProximityZoneBuilder
 import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentBeaconTestBinding
+import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.service.BeaconService
 import com.example.supertraining.service.ServiceTest
 import com.example.supertraining.view.activity.MainActivity
 import com.example.supertraining.view.adapter.RecyclerViewBeaconTestAdapter
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.utill.toastLongShow
+import com.example.supertraining.viewmodel.TestViewModel
+import com.example.supertraining.viewmodel.factory.ViewModelFactory
 import com.minew.beacon.*
 import kotlinx.android.synthetic.main.fragment_beacon_test.*
 import kotlinx.coroutines.*
@@ -34,7 +36,8 @@ import java.util.*
 
 
 class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.fragment_beacon_test) {
-    private lateinit var bluetoothAdapter:BluetoothAdapter
+    private var bluetoothAdapter: BluetoothAdapter? = null
+
     companion object {
         const val IBEACON_LAYOUT = "m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"
         const val REQUEST_ENABLE_BT = 4444
@@ -43,14 +46,22 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
     }
 
     private var beaconManager: BeaconManager? = null
+
     private lateinit var beaconService: BeaconService
     private lateinit var bindConnection: ServiceConnection
     private lateinit var observationHandler: ProximityObserver.Handler
     private lateinit var consumer: BeaconConsumer
     override fun FragmentBeaconTestBinding.setDataBind() {
         this.beaconTestFragment = this@BeaconTestFragment
+        setBluetoothAdapter()
         setBindConnection()
         startBindService()
+    }
+
+    private fun setBluetoothAdapter() {
+        bluetoothAdapter ?: BluetoothAdapter.getDefaultAdapter().also {
+            bluetoothAdapter = it
+        }
     }
 
     private fun startBindService() {
@@ -62,8 +73,6 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
             )
         }
     }
-
-
 
 
     private fun setConsumer() {
@@ -147,28 +156,28 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
     }
 
 
+//    private fun showBLEDialog() {
+//        if (!viewModel.beaconBackEventCheck) {
+//            val enableIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+//            startActivityForResult(enableIntent, REQUEST_ENABLE_BT)
+//        } else {
+//            findNavController().popBackStack()
+//        }
+//    }
 
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_ENABLE_BT) {
+//            if (requestCode == Activity.RESULT_OK) {
+//                bluetoothAdapter!!.enable()
+//            }
+//            if (!bluetoothAdapter!!.isEnabled) {
+//                context?.toastLongShow("여기다 TTS 넣을거임 블루투스를 꺼주지 말아주세요 While문 ")
+//            }
+//        }
+//    }
 
-    private fun showBLEDialog() {
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        val enableIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        startActivityForResult(enableIntent, REQUEST_ENABLE_BT)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_ENABLE_BT) {
-            if(requestCode == Activity.RESULT_OK) {
-                bluetoothAdapter.enable()
-            }
-                if(!bluetoothAdapter.isEnabled) {
-                    context?.toastLongShow("여기다 TTS 넣을거임 블루투스를 꺼주지 말아주세요 While문 ")
-                }
-
-        }
-    }
-
-     fun setButtonEstimoteUseClickListener(v: View) {
+    fun setButtonEstimoteUseClickListener(v: View) {
 
         // KOTLIN
         val intent = Intent(requireContext(), MainActivity::class.java)
@@ -203,15 +212,13 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
             .forTag("venue")
             .inFarRange()
             .onEnter { Log.d("asdasd", "입장 했을때 ${it.deviceId}") }
-            .onExit {Log.d("asdasd", "비콘에서 나갔을때")}
+            .onExit { Log.d("asdasd", "비콘에서 나갔을때") }
             .onContextChange {}
             .build()
 
         observationHandler = proximityObserver.startObserving(venueZone)
 
     }
-
-
 
 
     fun setButtonIBeaconSdkClickListener(v: View) {
@@ -262,18 +269,68 @@ class BeaconTestFragment : BaseFragment<FragmentBeaconTestBinding>(R.layout.frag
     }
 
 
-     fun setButtonAltBeaconLibraryClickListener(v: View) {
-            beaconManager = BeaconManager.getInstanceForApplication(requireContext())
-            beaconManager!!.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT));
-            setConsumer()
-            beaconManager?.bind(consumer)
+    fun setButtonAltBeaconLibraryClickListener(v: View) {
+        beaconManager = BeaconManager.getInstanceForApplication(requireContext())
+        beaconManager!!.beaconParsers.add(BeaconParser().setBeaconLayout(IBEACON_LAYOUT));
+        setConsumer()
+        beaconManager?.bind(consumer)
 
     }
+    private fun enableDisableBT() {
+        if (bluetoothAdapter == null)
+            Log.d("blueToothNullCheck", "잡힌 블루투스가 하나도 없습니다.")
+
+        if (!bluetoothAdapter!!.isEnabled) {
+            Log.d("blueToothNullCheck", "블루투스가 활성화를 시도합니다.")
+            val enableBTIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivity(enableBTIntent)
+            val bTIntent = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+            context?.registerReceiver(mBroadCastReceiver, bTIntent)
+        }
+    }
+
+    private val mBroadCastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            val action = intent.action
+            if (action == BluetoothAdapter.ACTION_STATE_CHANGED) {
+                when (intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)) {
+
+                    BluetoothAdapter.STATE_ON ->
+                        Log.d(
+                        "blueToothChangeCheck",
+                        "onReceive State Off"
+                    )
+
+                    BluetoothAdapter.STATE_OFF ->
+                        Log.d(
+                        "blueToothChangeCheck",
+                        "이곳에서 TTS처리"
+                    )
+
+                    BluetoothAdapter.STATE_TURNING_ON ->
+                        Log.d(
+                        "blueToothChangeCheck",
+                        "onReceive turning on"
+                    )
+
+                    BluetoothAdapter.STATE_TURNING_OFF -> {
+                        enableDisableBT()
+                        Log.d(
+                            "blueToothChangeCheck",
+                            "이곳에서 TTS처리"
+                        )
+                    }
+                }
+            }
+        }
+    }
+
 
 
     override fun onResume() {
         super.onResume()
-        showBLEDialog()
+        enableDisableBT()
+
     }
 
     override fun onDestroy() {
