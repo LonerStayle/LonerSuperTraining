@@ -25,7 +25,7 @@ class BeaconService : Service() {
      var mMinewBeaconManager: MinewBeaconManager? = null
      val comp = UserRssi()
     private val localBinder = LocalBinder()
-
+    var uuidCheckCancelList:MutableList<MinewBeacon> = mutableListOf()
 
     fun setInitService(){
 //        val pendingIntent = NavDeepLinkBuilder(this@BeaconService)

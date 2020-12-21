@@ -91,8 +91,10 @@
             android:id="@+id/button_theWalkerLoginTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="더워커 로그인 테스트"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:onClick="@{()->theWalkerVM.snsLogin(thisFragment.setPush())}"
+            android:text="더워커 로그인 테스트"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -100,9 +102,20 @@
             android:id="@+id/button_getWalkCourseList"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="더워커 산책리스트 가져오기"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:onClick="@{thisFragment::click}"
+            android:text="더워커 산책리스트 가져오기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="더워커 회원가입 테스트"
+            app:layout_constraintStart_toStartOf="@+id/button_theWalkerLoginTest"
+            app:layout_constraintTop_toBottomOf="@+id/button_theWalkerLoginTest" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

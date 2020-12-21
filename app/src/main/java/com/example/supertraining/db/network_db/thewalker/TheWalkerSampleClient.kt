@@ -1,11 +1,9 @@
 package com.example.supertraining.db.network_db.thewalker
 
-import com.example.supertraining.db.network_db.thewalker.dataholder.TheWalkerPush
-import com.example.supertraining.db.network_db.thewalker.dataholder.TheWalkerUesr
+import com.example.supertraining.db.network_db.thewalker.dataholder.response.SignInCheck
+import com.example.supertraining.db.network_db.thewalker.dataholder.request.Push
 import com.example.supertraining.db.network_db.thewalker.dataholder.TheWalkerWalkCourse
 import com.google.gson.JsonElement
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
@@ -23,19 +21,35 @@ object TheWalkerApiClient {
 interface TheWalkerApiService {
 
     //    - type(param) : naver, kakao, google, apple
-//    - version: 해당 유저의 현재 버전
-//    - push: 푸쉬 알림을 위한 정보
-//    - type: 해당 유저의 os
-//    - token: 푸쉬 토큰 값
-//    - oauth: oauth 서버로부터 받은 토큰 등 모든 바디
-    @FormUrlEncoded
+    //    - version: 해당 유저의 현재 버전
+    //    - push: 푸쉬 알림을 위한 정보
+    //    - type: 해당 유저의 os
+    //    - token: 푸쉬 토큰 값
+    //    - oauth: oauth 서버로부터 받은 토큰 등 모든 바디
+
+
     @POST("api/user/signin/sns/{type}")
-     fun snsLogin(
+     suspend fun snsLogin(
         @Path("type") loginType: String,
-        @Field("version") version: String,
-        @Field("push") push: TheWalkerPush,
-        @Field("oauth") oauth:JsonElement? = null
-    ):TheWalkerUesr
+        @Body version: String,
+        @Body push: Push,
+        @Body oauth:String? = null
+    ): SignInCheck
+
+
+     @POST("api/user/signup/sns")
+     suspend fun snsRegister(
+         @Body deviceId: String?,
+         @Body  marketing: Boolean?,
+         @Body  nickname: String?,
+         @Body  profile: String?,
+         @Body  pushToken: String?,
+         @Body  pushType: String?,
+         @Body  thumbnail: String?,
+         @Body  token: String?,
+         @Body  version: String?
+     ):String
+
 
     @GET("api/walk/getWalkList")
     suspend fun getWalkCourseList():List<TheWalkerWalkCourse>
