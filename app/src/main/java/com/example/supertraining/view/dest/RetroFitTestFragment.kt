@@ -6,7 +6,8 @@ import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentRetrofitTestBinding
 import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.db.network_db.sample.dataholder.User
-import com.example.supertraining.db.network_db.thewalker.dataholder.TheWalkerPush
+import com.example.supertraining.db.network_db.thewalker.dataholder.request.Push
+import com.example.supertraining.db.network_db.thewalker.dataholder.request.Register
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.utill.toastShortShow
 import com.example.supertraining.viewmodel.NetworkViewModel
@@ -22,7 +23,7 @@ class RetroFitTestFragment :
         val factory = ViewModelFactory(database.dataSource)
         factory
     }
-    private val theWalkerViewModel by viewModels<TheWalkerViewModel>{
+    private val theWalkerViewModel by viewModels<TheWalkerViewModel> {
         val database = TestDataBase.getInstance(requireContext())
         val factory = ViewModelFactory(database.dataSource)
         factory
@@ -56,7 +57,7 @@ class RetroFitTestFragment :
             Log.d("asdfasdf", "${it.signedUp}")
         })
 
-        theWalkerViewModel.walkCourseList.observe(viewLifecycleOwner,{
+        theWalkerViewModel.walkCourseList.observe(viewLifecycleOwner, {
             context?.toastShortShow(it[0].spotList[0])
             Log.d("asdfasdf", it[0].spotList[0])
         })
@@ -86,8 +87,11 @@ class RetroFitTestFragment :
         }
     }
 
-    fun setPush() = TheWalkerPush("kakao", "1234")
-fun click(v: View){
-    theWalkerViewModel.getWalkCourseList()
-}
+
+
+    fun setPush() = Push("kakao", "1234")
+
+    fun click(v: View) {
+        theWalkerViewModel.getWalkCourseList()
+    }
 }

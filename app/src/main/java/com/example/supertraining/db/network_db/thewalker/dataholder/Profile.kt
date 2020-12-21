@@ -4,7 +4,10 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class TheWalkerPush (
-    val type:String,
-    val token:String
+data class Profile(
+    val birthyear: String,
+    val email: String,
+    val gender: String,
+    val nickname: String,
+    val profile: String
 ):Parcelable
