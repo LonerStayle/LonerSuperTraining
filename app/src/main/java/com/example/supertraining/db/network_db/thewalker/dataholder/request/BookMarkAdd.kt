@@ -4,7 +4,6 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Push (
-    val type:String,
-    val token:String
+data class BookMarkAdd(
+    val id: String?
 ):Parcelable

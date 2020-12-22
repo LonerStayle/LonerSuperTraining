@@ -6,13 +6,14 @@ import com.example.supertraining.R
 import com.example.supertraining.databinding.FragmentRetrofitTestBinding
 import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.db.network_db.sample.dataholder.User
-import com.example.supertraining.db.network_db.thewalker.dataholder.request.Push
-import com.example.supertraining.db.network_db.thewalker.dataholder.request.Register
+import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
 import com.example.supertraining.view.base.BaseFragment
 import com.example.supertraining.view.utill.toastShortShow
 import com.example.supertraining.viewmodel.NetworkViewModel
 import com.example.supertraining.viewmodel.TheWalkerViewModel
 import com.example.supertraining.viewmodel.factory.ViewModelFactory
+import com.kakao.sdk.auth.LoginClient
+import com.kakao.sdk.auth.model.OAuthToken
 import android.view.View as View
 
 class RetroFitTestFragment :
@@ -33,7 +34,6 @@ class RetroFitTestFragment :
 
         setData()
         setObserver()
-
     }
 
     override fun FragmentRetrofitTestBinding.setClickListener() {}
@@ -43,7 +43,6 @@ class RetroFitTestFragment :
         thisFragment = this@RetroFitTestFragment
         netWorkVM = networkViewModel
         theWalkerVM = theWalkerViewModel
-
     }
 
 
@@ -58,10 +57,27 @@ class RetroFitTestFragment :
         })
 
         theWalkerViewModel.walkCourseList.observe(viewLifecycleOwner, {
-            context?.toastShortShow(it[0].spotList[0])
-            Log.d("asdfasdf", it[0].spotList[0])
+            Log.d("asdfasdf", it.walkList.size.toString())
         })
 
+        theWalkerViewModel.getMyProfile.observe(viewLifecycleOwner,{
+            Log.d("asdfasdf", it.userData._id!!)
+        })
+
+        theWalkerViewModel.getNoticeList.observe(viewLifecycleOwner,{
+            Log.d("asdfasdf", it.noticeList!!.size.toString())
+        })
+        theWalkerViewModel.getQuestionList.observe(viewLifecycleOwner,{
+            Log.d("asdfasdf", it.questionList!!.size.toString())
+        })
+
+        theWalkerViewModel.getSearchList.observe(viewLifecycleOwner,{
+            Log.d("asdfasdf", it.walkList.size.toString())
+        })
+
+        theWalkerViewModel.getSpotList.observe(viewLifecycleOwner,{
+            Log.d("asdfasdf", it.spotList!!.size.toString())
+        })
     }
 
 /*
@@ -87,11 +103,38 @@ class RetroFitTestFragment :
         }
     }
 
+    fun loginTest(v: View) {
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e("TAG", "로그인 실패", error)
 
+            } else if (token != null) {
+                 theWalkerViewModel.snsLogin("kakao",
+                    Login(
+                        null,
+                        Push("kakao", token.toString()),
+                        "1.5"
+                    )
+                )
+            }
+        }
 
-    fun setPush() = Push("kakao", "1234")
-
-    fun click(v: View) {
-        theWalkerViewModel.getWalkCourseList()
+        if (LoginClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
+            LoginClient.instance.loginWithKakaoTalk(requireContext(), callback = callback)
+        } else {
+            LoginClient.instance.loginWithKakaoAccount(requireContext(), callback = callback)
+        }
     }
+
+    fun setContactData() = ContactAdd("문의사항 테스트","asdasd@asdasd.com","test","테스트")
+
+    fun setKeyWord() = "정동"
+
+    fun setFeedBackData() = FeedBackAdd("1231","4")
+
+    fun setBookMarkData() = BookMarkAdd("34213412")
+
+    fun setScrapData() = ScrapAdd("34213412")
+
+    fun setSpotListSearchId() = "34213412"
 }

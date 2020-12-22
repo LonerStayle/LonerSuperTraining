@@ -1,10 +1,10 @@
-package com.example.supertraining.db.network_db.thewalker.dataholder
+package com.example.supertraining.db.network_db.thewalker.dataholder.response
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Profile(
+data class SignInProfile(
     val birthyear: String,
     val email: String,
     val gender: String,

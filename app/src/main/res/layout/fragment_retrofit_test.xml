@@ -16,7 +16,6 @@
         <variable
             name="thisFragment"
             type="com.example.supertraining.view.dest.RetroFitTestFragment" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,8 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <Button
@@ -52,9 +50,8 @@
             android:layout_marginStart="32dp"
             android:onClick="@{()->netWorkVM.userCheck(thisFragment.setUserData())}"
             android:text="유저 확인"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/button_register"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/button_register" />
 
 
         <EditText
@@ -93,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:onClick="@{()->theWalkerVM.snsLogin(thisFragment.setPush())}"
+            android:onClick="@{thisFragment::loginTest}"
             android:text="더워커 로그인 테스트"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -104,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{thisFragment::click}"
+            android:onClick="@{()->theWalkerVM.getWalkList()}"
             android:text="더워커 산책리스트 가져오기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -117,5 +114,117 @@
             android:text="더워커 회원가입 테스트"
             app:layout_constraintStart_toStartOf="@+id/button_theWalkerLoginTest"
             app:layout_constraintTop_toBottomOf="@+id/button_theWalkerLoginTest" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->theWalkerVM.getMyProfile()}"
+            android:text="더워커 프로필 찾기 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button_getWalkCourseList"
+            app:layout_constraintStart_toStartOf="@+id/button_getWalkCourseList"
+            app:layout_constraintTop_toBottomOf="@+id/button_getWalkCourseList" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->theWalkerVM.userDelete()}"
+            android:text="더워커 회원탈퇴 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button2"
+            app:layout_constraintStart_toStartOf="@+id/button2"
+            app:layout_constraintTop_toBottomOf="@+id/button2" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()-> theWalkerVM.getNoticeList()}"
+            android:text="더워커 공지사항리스트 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:onClick="@{()->theWalkerVM.feedbackSend(thisFragment.setContactData())}"
+            android:text="더워커 문의사항 보내기 \n테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button4"
+            app:layout_constraintStart_toStartOf="@+id/button4"
+            app:layout_constraintTop_toBottomOf="@+id/button4" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->theWalkerVM.searchWalkerList(thisFragment.setKeyWord())}"
+            android:text="더워커 검색API 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toBottomOf="@+id/button11" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:onClick="@{()->theWalkerVM.addFeedBack(thisFragment.setFeedBackData())}"
+            android:text="더워커 만족도조사 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button5"
+            app:layout_constraintStart_toStartOf="@+id/button5"
+            app:layout_constraintTop_toBottomOf="@+id/button5" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:onClick="@{()->theWalkerVM.addBookMark(thisFragment.setBookMarkData())}"
+            android:text="더워커 북마크추가 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button6"
+            app:layout_constraintStart_toStartOf="@+id/button6"
+            app:layout_constraintTop_toBottomOf="@+id/button6" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="더워커 스크랩 추가 테스트"
+            android:onClick="@{()->theWalkerVM.addScrap(thisFragment.setScrapData())}"
+            app:layout_constraintEnd_toEndOf="@+id/button7"
+            app:layout_constraintStart_toStartOf="@+id/button7"
+            app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+        <Button
+            android:id="@+id/button10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="더워커 스팟리스트 가져오기"
+            android:onClick="@{()->theWalkerVM.getSpotList(thisFragment.setSpotListSearchId())}"
+            app:layout_constraintEnd_toEndOf="@+id/button8"
+            app:layout_constraintStart_toStartOf="@+id/button8"
+            app:layout_constraintTop_toBottomOf="@+id/button8" />
+
+        <Button
+            android:id="@+id/button11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="@{()-> theWalkerVM.getQuestionList()}"
+            android:text="더워커 궁금해요 테스트"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
