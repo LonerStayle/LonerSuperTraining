@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Push (
-    val type:String,
-    val token:String
+data class Login(
+    val oauth: Oauth?,
+    val push: Push?,
+    val version: String?
 ):Parcelable

@@ -1,16 +1,14 @@
 package com.example.supertraining.db.network_db.thewalker
 
-import com.example.supertraining.db.network_db.thewalker.dataholder.response.SignInCheck
-import com.example.supertraining.db.network_db.thewalker.dataholder.request.Push
-import com.example.supertraining.db.network_db.thewalker.dataholder.TheWalkerWalkCourse
-import com.google.gson.JsonElement
+import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
+import com.example.supertraining.db.network_db.thewalker.dataholder.response.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 object TheWalkerApiClient {
     private const val BASE_URI = "http://13.125.116.170:3000/"
-    val api:TheWalkerApiService = Retrofit.Builder()
+    val api: TheWalkerApiService = Retrofit.Builder()
         .baseUrl(BASE_URI)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
@@ -29,29 +27,51 @@ interface TheWalkerApiService {
 
 
     @POST("api/user/signin/sns/{type}")
-     suspend fun snsLogin(
+    suspend fun snsLogin(
         @Path("type") loginType: String,
-        @Body version: String,
-        @Body push: Push,
-        @Body oauth:String? = null
+        @Body login: Login
     ): SignInCheck
 
 
-     @POST("api/user/signup/sns")
-     suspend fun snsRegister(
-         @Body deviceId: String?,
-         @Body  marketing: Boolean?,
-         @Body  nickname: String?,
-         @Body  profile: String?,
-         @Body  pushToken: String?,
-         @Body  pushType: String?,
-         @Body  thumbnail: String?,
-         @Body  token: String?,
-         @Body  version: String?
-     ):String
+    @POST("api/user/signup/sns")
+    suspend fun snsRegister(
+        @Body register: Register
+    ): String
 
+
+    @GET("api/user/v2/getProfile")
+    suspend fun getMyProfile(): MyProfile
+
+    @DELETE("api/user/withdraw")
+    suspend fun userDelete()
+
+    @GET("api/etc/noticeList")
+    suspend fun getNoticeList(): NoticeList
+
+    @GET("api/etc/questionList")
+    suspend fun getQuestionList(): QuestionList
+
+    @POST("api/etc/contact")
+    suspend fun contactSend(@Body contactAdd: ContactAdd)
+
+    @GET("api/walk/search")
+    suspend fun searchWalkerList(@Query("keyword") keyword: String): WalkList
+
+    @POST("api/walk/addFeedback")
+    suspend fun addFeedBack(@Body feedBackAdd: FeedBackAdd)
+
+
+    @POST("api/walk/addBookmark")
+    suspend fun addBookMark(@Body bookMarkAdd: BookMarkAdd)
+
+    @POST("api/walk/addScrap")
+    suspend fun addScrap(@Body scrapAdd: ScrapAdd)
+
+    @GET("api/walk/getSpotList/{id}")
+    suspend fun getSpotList(@Path("id") id:String):SpotList
 
     @GET("api/walk/getWalkList")
-    suspend fun getWalkCourseList():List<TheWalkerWalkCourse>
+    suspend fun getWalkCourseList(): WalkList
+
 
 }
