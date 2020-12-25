@@ -12,4 +12,8 @@
     
     <string name="estimote_app_id"/>
     <string name="estimote_app_token"/>
+
+
+    <string name="ClientID_google">75751258916-s2e0ljar0eluntrhu972a27pkhvhe0qs.apps.googleusercontent.com</string>
+    <string name="ClientSecret_google">SP13fbQtac6PkYhlbKM0WMt0</string>
 </resources>

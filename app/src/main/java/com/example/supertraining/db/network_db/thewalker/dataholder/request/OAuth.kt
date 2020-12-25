@@ -4,5 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Oauth(
+data class OAuth(
+    val accessToken: String?,
+    val expires: Int?,
+    val ttl: Int?
+
 ):Parcelable

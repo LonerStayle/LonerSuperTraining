@@ -38,6 +38,7 @@ buildscript {
         def estimoteVersion = '1.0.5'
 
         def kakaoVersion = '2.2.0'
+        def googleLogin = '19.0.0'
 
         libraries = [
                 //kotlin 기본 라이브러리
@@ -113,7 +114,9 @@ buildscript {
                 "com.estimote:proximity-sdk:$estimoteVersion",
 
 //카카오 로그인
-                "com.kakao.sdk:v2-user:$kakaoVersion"
+                "com.kakao.sdk:v2-user:$kakaoVersion",
+
+                "com.google.android.gms:play-services-auth:$googleLogin"
 
         ]
 

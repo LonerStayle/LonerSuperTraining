@@ -7,5 +7,6 @@ import kotlinx.android.parcel.Parcelize
 data class SignInCheck(
     val idToken: String,
     val signInProfile: SignInProfile,
+    val token:String,
     val signedUp: Boolean
 ):Parcelable

@@ -5,6 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Push (
-    val type:String,
-    val token:String
+    val type:String?,
+    val token:String?
 ):Parcelable

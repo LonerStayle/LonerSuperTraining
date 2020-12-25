@@ -3,14 +3,20 @@ package com.example.supertraining.repository
 import com.example.supertraining.db.network_db.thewalker.TheWalkerApiClient
 import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
 import com.example.supertraining.db.network_db.thewalker.dataholder.response.*
+import com.kakao.sdk.auth.model.OAuthToken
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FieldMap
 import retrofit2.http.Path
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 interface TheWalkerDataSource {
 
     suspend fun snsLogin(
-        loginType: String,
-        login: Login
+         loginType: String,
+         login: Login
     ): SignInCheck
 
     suspend fun snsRegister(
@@ -42,9 +48,12 @@ interface TheWalkerDataSource {
 }
 
 class TheWalkerRepository : TheWalkerDataSource {
-
-    override suspend fun snsLogin(loginType: String, login: Login) =
-        TheWalkerApiClient.api.snsLogin(loginType, login)
+    override suspend fun snsLogin(
+        loginType: String,
+        login: Login
+    ): SignInCheck {
+        return TheWalkerApiClient.api.snsLogin(loginType, login)
+    }
 
 
     override suspend fun snsRegister(register: Register) =

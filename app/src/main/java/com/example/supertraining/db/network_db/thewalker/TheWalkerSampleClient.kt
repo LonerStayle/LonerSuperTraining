@@ -2,9 +2,13 @@ package com.example.supertraining.db.network_db.thewalker
 
 import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
 import com.example.supertraining.db.network_db.thewalker.dataholder.response.*
+import com.kakao.sdk.auth.model.OAuthToken
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.util.*
+import kotlin.collections.HashMap
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 object TheWalkerApiClient {
     private const val BASE_URI = "http://13.125.116.170:3000/"
@@ -26,12 +30,12 @@ interface TheWalkerApiService {
     //    - oauth: oauth 서버로부터 받은 토큰 등 모든 바디
 
 
+
     @POST("api/user/signin/sns/{type}")
     suspend fun snsLogin(
         @Path("type") loginType: String,
         @Body login: Login
     ): SignInCheck
-
 
     @POST("api/user/signup/sns")
     suspend fun snsRegister(
@@ -68,7 +72,7 @@ interface TheWalkerApiService {
     suspend fun addScrap(@Body scrapAdd: ScrapAdd)
 
     @GET("api/walk/getSpotList/{id}")
-    suspend fun getSpotList(@Path("id") id:String):SpotList
+    suspend fun getSpotList(@Path("id") id: String): SpotList
 
     @GET("api/walk/getWalkList")
     suspend fun getWalkCourseList(): WalkList

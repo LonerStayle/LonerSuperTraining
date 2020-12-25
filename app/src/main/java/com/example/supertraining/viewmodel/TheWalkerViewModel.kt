@@ -7,7 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
 import com.example.supertraining.db.network_db.thewalker.dataholder.response.*
 import com.example.supertraining.repository.TheWalkerRepository
+import com.kakao.sdk.auth.model.OAuthToken
 import kotlinx.coroutines.launch
+import java.util.HashMap
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class TheWalkerViewModel(private val repository: TheWalkerRepository) : ViewModel() {
 
@@ -49,13 +52,13 @@ class TheWalkerViewModel(private val repository: TheWalkerRepository) : ViewMode
 
 
 
-    fun snsLogin(type: String, login: Login) {
+    fun snsLogin(type: String,login: Login) {
         viewModelScope.launch {
-            val user = repository.snsLogin(type, login)
+            val user = repository.snsLogin(type,login)
             _userData.postValue(user)
-
         }
     }
+
 
 
     fun snsRegister(register: Register) {
