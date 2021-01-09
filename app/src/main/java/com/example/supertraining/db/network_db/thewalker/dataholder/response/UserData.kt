@@ -13,4 +13,5 @@ data class UserData(
     val profile: String?,
     val setting: Setting?,
     val thumbnail: String?
+
 ):Parcelable

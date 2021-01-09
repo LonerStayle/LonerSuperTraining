@@ -15,7 +15,6 @@ import com.example.supertraining.db.locale_db.entity.RoomEntityTest
     companion object{
         @Volatile
         private var INSTANCE: TestDataBase?= null
-
         fun getInstance(context: Context): TestDataBase = synchronized(this) {
             INSTANCE ?: Room.databaseBuilder(
                 context,

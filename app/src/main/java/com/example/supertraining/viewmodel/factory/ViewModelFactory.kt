@@ -31,7 +31,6 @@ class ViewModelFactory(
             modelClass.isAssignableFrom(TheWalkerViewModel::class.java)->{
                 TheWalkerViewModel(theWalkerRepository) as T
             }
-
             else -> throw IllegalAccessException("Unknown ViewModel")
         }
 
