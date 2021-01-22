@@ -11,6 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
@@ -125,6 +126,17 @@
         android:onClick="@{main::setButtonGoToTheBeaconTestClickListener}"
         app:layout_constraintStart_toStartOf="@+id/button_goToTheGeoFencing"
         app:layout_constraintTop_toBottomOf="@+id/button_goToTheGeoFencing" />
+
+    <Button
+        android:id="@+id/buttonDialogStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="생명주기 테스트"
+        android:onClick="@{main::setButtonDialogStartClickListener}"
+        app:layout_constraintBottom_toBottomOf="@+id/button_searchViewTest"
+        app:layout_constraintStart_toEndOf="@+id/button_searchViewTest" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

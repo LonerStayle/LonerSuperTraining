@@ -8,6 +8,9 @@ import com.example.supertraining.db.network_db.thewalker.dataholder.request.*
 import com.example.supertraining.db.network_db.thewalker.dataholder.response.*
 import com.example.supertraining.repository.TheWalkerRepository
 import com.kakao.sdk.auth.model.OAuthToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.broadcast
 import kotlinx.coroutines.launch
 import java.util.HashMap
 import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
@@ -57,6 +60,8 @@ class TheWalkerViewModel(private val repository: TheWalkerRepository) : ViewMode
             val user = repository.snsLogin(type,login)
             _userData.postValue(user)
         }
+
+
     }
 
 
@@ -66,6 +71,7 @@ class TheWalkerViewModel(private val repository: TheWalkerRepository) : ViewMode
             val token = repository.snsRegister(register)
             _getToken.value = token
         }
+
     }
 
     fun getMyProfile() {
@@ -82,6 +88,7 @@ class TheWalkerViewModel(private val repository: TheWalkerRepository) : ViewMode
     }
 
     fun getNoticeList(){
+
         viewModelScope.launch {
             val noticeList = repository.getNoticeList()
             _getNoticeList.value = noticeList

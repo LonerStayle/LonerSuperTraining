@@ -141,18 +141,18 @@ class RetroFitTestFragment :
                 Log.d("reToken", oauth.refreshToken)
                 Log.d("reTimeToken", oauth.refreshTokenExpiresAt?.time.toString())
 
-                theWalkerViewModel.snsLogin(
-                    "kakao",
-                    Login(
-                        "kakao", OAuthKaKao(
-                            oauth.accessToken,
-                            oauth.accessTokenExpiresAt.time,
-                            oauth.refreshToken,
-                            oauth.refreshTokenExpiresAt!!.time,
-                            oauth.scopes
-                        )
-                    )
-                )
+//                theWalkerViewModel.snsLogin(
+//                    "kakao",
+//                    Login(
+//                        "kakao", OAuthKaKao(
+//                            oauth.accessToken,
+//                            oauth.accessTokenExpiresAt.time,
+//                            oauth.refreshToken,
+//                            oauth.refreshTokenExpiresAt!!.time,
+//                            oauth.scopes
+//                        )
+//                    )
+//                )
 
             }
 

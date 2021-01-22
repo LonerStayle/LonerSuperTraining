@@ -10,5 +10,5 @@ import org.json.JSONObject
 @Parcelize
 data class Login(
     val version: String?,
-    val oauth: Any,
+    val oauth: OAuth,
 ):Parcelable
