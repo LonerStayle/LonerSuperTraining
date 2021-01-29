@@ -8,11 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.supertraining.db.locale_db.TestDataBase
-import com.example.supertraining.viewmodel.NetworkViewModel
-import com.example.supertraining.viewmodel.TestViewModel
-import com.example.supertraining.viewmodel.factory.ViewModelFactory
 
 abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): Fragment() {
 
@@ -29,6 +24,7 @@ abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): 
         setClickListener()
         root
     }
+
     abstract fun VDB.setDataBind()
     open fun VDB.setClickListener() = Unit
 }
