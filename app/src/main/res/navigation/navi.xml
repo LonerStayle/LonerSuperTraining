@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_mainFragment_to_beaconTestFragment"
             app:destination="@id/beaconTestFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_simpleRecyclerViewTest"
+            app:destination="@id/simpleRecyclerViewTest" />
     </fragment>
     <fragment
         android:id="@+id/naviTestFragment"
@@ -67,4 +70,8 @@
         android:id="@+id/beaconTestFragment"
         android:name="com.example.supertraining.view.dest.BeaconTestFragment"
         android:label="BeaconTestFragment" />
+    <fragment
+        android:id="@+id/simpleRecyclerViewTest"
+        android:name="com.example.supertraining.view.dest.SimpleRecyclerViewTest"
+        android:label="SimpleRecyclerViewTest" />
 </navigation>

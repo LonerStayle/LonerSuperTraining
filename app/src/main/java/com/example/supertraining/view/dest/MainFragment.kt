@@ -17,8 +17,8 @@ import com.example.supertraining.view.utill.toastShortShow
 import com.example.supertraining.viewmodel.TestViewModel
 import com.example.supertraining.viewmodel.factory.ViewModelFactory
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.manager.Lifecycle
-import kotlinx.coroutines.launch
+import com.example.supertraining.databinding.DialogTestBinding
+import com.example.supertraining.view.base.CustomDialog
 
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
@@ -34,10 +34,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
         Log.d("lifeCycleTest", "onCreateView")
 
         lifecycleScopeTest()
+        val testDialog = CustomDialog<DialogTestBinding>(requireContext(),
+        R.layout.dialog_test)
+        testDialog.setWindowManager()
+        testDialog.show()
+
     }
 
     private fun lifecycleScopeTest() {
-
 
             lifecycleScope.launchWhenCreated {
                 Log.d("lifecycleScope", "Created")
@@ -111,6 +115,11 @@ class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
             { return@show }
         )
     }
+
+    fun setButtonGoToTheSimpleRecyclerView(v: View){
+        findNavController().navigate(R.id.action_mainFragment_to_simpleRecyclerViewTest)
+    }
+
 
     override fun onPause() {
         super.onPause()

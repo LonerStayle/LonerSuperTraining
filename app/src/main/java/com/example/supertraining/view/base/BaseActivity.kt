@@ -1,0 +1,23 @@
+package com.example.supertraining.view.base
+
+import android.os.Bundle
+import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+
+abstract class BaseActivity<VDB: ViewDataBinding>(@LayoutRes val layoutId:Int): AppCompatActivity() {
+    protected lateinit var binding:VDB
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this,layoutId)
+        binding.run{
+            setDataBind()
+            onCreate()
+            root
+        }
+    }
+    abstract fun VDB.setDataBind()
+    abstract fun VDB.onCreate()
+
+}

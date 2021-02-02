@@ -137,6 +137,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/button_searchViewTest"
         app:layout_constraintStart_toEndOf="@+id/button_searchViewTest" />
 
+    <Button
+        android:id="@+id/button_goToTheSimpleRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="심플 리싸실험"
+        android:onClick="@{main::setButtonGoToTheSimpleRecyclerView}"
+        app:layout_constraintStart_toStartOf="@+id/button_goTotheNavi"
+        app:layout_constraintTop_toBottomOf="@+id/button_goTotheNavi" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
