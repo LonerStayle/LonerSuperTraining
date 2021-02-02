@@ -8,24 +8,29 @@ import com.example.supertraining.databinding.FragmentSearchViewTestBinding
 import com.example.supertraining.db.locale_db.TestDataBase
 import com.example.supertraining.db.locale_db.entity.RoomEntityTest
 import com.example.supertraining.view.adapter.RecyclerViewSearchTestAdapter
-import com.example.supertraining.view.base.BaseFragment
+import com.example.supertraining.view.base.TestBase
 import com.example.supertraining.viewmodel.TestViewModel
 import com.example.supertraining.viewmodel.factory.ViewModelFactory
 
 
 class SearchViewTestFragment :
-    BaseFragment<FragmentSearchViewTestBinding>(R.layout.fragment_search_view_test) {
+    TestBase<FragmentSearchViewTestBinding>(
+        R.layout.fragment_search_view_test,
+        TestViewModel::class.java,
+    ) {
 
-    private val mainViewModel by viewModels<TestViewModel> {
-        val testDatabase = TestDataBase.getInstance(requireContext())
-        val factory = ViewModelFactory(testDatabase.dataSource)
-        factory
-    }
+
+//    private val mainViewModel by viewModels<TestViewModel> {
+//        val testDatabase = TestDataBase.getInstance(requireContext())
+//        val factory = ViewModelFactory(testDatabase.dataSource)
+//        factory
+//    }
 
     lateinit var adapter: RecyclerViewSearchTestAdapter
     private var dataList: MutableList<RoomEntityTest>? = null
 
     override fun FragmentSearchViewTestBinding.setDataBind() {
+
         thisFragment = this@SearchViewTestFragment
         setAdapter()
     }
@@ -36,7 +41,7 @@ class SearchViewTestFragment :
     }
 
     private fun FragmentSearchViewTestBinding.setAdapter() {
-        mainViewModel.testList.observe(viewLifecycleOwner, {
+        vm?.testList?.observe(viewLifecycleOwner, {
             dataList = it as MutableList<RoomEntityTest>
             adapter = RecyclerViewSearchTestAdapter(dataList!!)
             recyclerViewSearchViewTest.adapter = adapter

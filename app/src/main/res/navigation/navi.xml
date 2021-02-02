@@ -72,6 +72,6 @@
         android:label="BeaconTestFragment" />
     <fragment
         android:id="@+id/simpleRecyclerViewTest"
-        android:name="com.example.supertraining.view.dest.SimpleRecyclerViewTest"
+        android:name="com.example.supertraining.view.dest.SimpleRecyclerViewTestFragment"
         android:label="SimpleRecyclerViewTest" />
 </navigation>

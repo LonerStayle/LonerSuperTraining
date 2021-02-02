@@ -8,8 +8,13 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.supertraining.viewmodel.factory.ViewModelFactory
 
-abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): Fragment() {
+abstract class BaseFragment<VDB:ViewDataBinding>(
+    @LayoutRes val layoutRes:Int,
+    ): Fragment() {
 
     lateinit var binding:VDB
     override fun onCreateView(
@@ -17,8 +22,7 @@ abstract class BaseFragment<VDB:ViewDataBinding>(@LayoutRes val layoutRes:Int): 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = DataBindingUtil.inflate<VDB>(layoutInflater,layoutRes,container,false).run {
-
-        lifecycleOwner = viewLifecycleOwner
+        lifecycleOwner = this@BaseFragment
         binding = this
         setDataBind()
         setClickListener()

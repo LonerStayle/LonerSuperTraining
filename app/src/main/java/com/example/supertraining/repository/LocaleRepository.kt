@@ -14,16 +14,16 @@ interface LocaleDataSource {
     fun delete(roomEntityTest: RoomEntityTest)
 }
 
-class LocaleRepository(private val dataSource: RoomDaoTest) : LocaleDataSource {
-    override fun getAllList1() = dataSource.getAllList1()
+class LocaleRepository(private val dataSource: RoomDaoTest?) : LocaleDataSource {
+    override fun getAllList1() = dataSource!!.getAllList1()
 
 
     override fun insert(roomEntityTest: RoomEntityTest) {
-        dataSource.insert(roomEntityTest)
+        dataSource!!.insert(roomEntityTest)
     }
 
     override fun delete(roomEntityTest: RoomEntityTest) {
-        dataSource.delete(roomEntityTest)
+        dataSource!!.delete(roomEntityTest)
     }
 
 }

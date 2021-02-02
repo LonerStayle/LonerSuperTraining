@@ -7,11 +7,12 @@ import com.example.supertraining.repository.LocaleRepository
 import com.example.supertraining.repository.NetworkRepository
 import com.example.supertraining.repository.TheWalkerRepository
 import com.example.supertraining.viewmodel.NetworkViewModel
+import com.example.supertraining.viewmodel.SimpleRvTestViewModel
 import com.example.supertraining.viewmodel.TestViewModel
 import com.example.supertraining.viewmodel.TheWalkerViewModel
 
 class ViewModelFactory(
-    localeDataSource: RoomDaoTest
+    localeDataSource: RoomDaoTest?
 ) : ViewModelProvider.Factory {
 
     private val localeRepository = LocaleRepository(localeDataSource)
@@ -30,6 +31,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(TheWalkerViewModel::class.java)->{
                 TheWalkerViewModel(theWalkerRepository) as T
+            }
+            modelClass.isAssignableFrom(SimpleRvTestViewModel::class.java)->{
+                SimpleRvTestViewModel() as T
             }
             else -> throw IllegalAccessException("Unknown ViewModel")
         }

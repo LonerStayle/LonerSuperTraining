@@ -1,5 +1,6 @@
 package com.example.supertraining.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
@@ -14,6 +15,7 @@ class SimpleRvTestViewModel():ViewModel() {
 
     init {
         _testList.postValue(setItemList())
+        Log.d("checkkk","심플 뷰모델 체크")
     }
 
     private fun setItemList():List<String>{

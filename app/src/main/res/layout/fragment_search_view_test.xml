@@ -7,6 +7,9 @@
         <variable
             name="thisFragment"
             type="com.example.supertraining.view.dest.SearchViewTestFragment" />
+        <variable
+            name="vm"
+            type="com.example.supertraining.viewmodel.TestViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
